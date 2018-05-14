@@ -1,4 +1,4 @@
-# carbfix.dat - created May 04, 2018, last edited May 04, 2018.
+# carbfix.dat - created May 04, 2018, last edited May 14, 2018.
 # The latest carbfix.dat version is available from https://github.com/martinvoigt/CarbFix
 #
 # The carbfix.dat thermodynamic database for PHREEQC is based on the core10.dat database, which is available at https://github.com/MarcNeveu/IcyDwarf/.
@@ -66,13 +66,10 @@
 # 77bar/kna: Barin, I., Knacke, O., and Kubaschewski, O., 1977, Thermochemical properties of inorganic substances. Supplement:  Springer-Verlag, New York. (Natrosilite, Pseudowollastonite, Rankinite)
 # 87bou/bar: http://dx.doi.org/10.2113/gsecongeo.82.7.1839 (ZnOH+)
 # 88db 3: Database development group iii/3, 1988, Errors in computation of estimated delH298 for montmor-x endmembers of smectite-di solid solution:  LLNL Internal Memo. (Montmor-Ca, K, Mg, Na)
-# 89db 7=89db 6, Database development group, 1989, Zeolite thermodynamic data:  LLNL Internal memo. (Clinoptilolite-Ca, K, Na, Mesolite)
+# 89db 7=89db 6, Database development group, 1989, Zeolite thermodynamic data:  LLNL Internal memo. (Clinoptilolite-K)
 # 76del/hal: http://dx.doi.org/10.1021/cr60301a001 (2 Cr solutes, 9 Cr solids)
 # 92gre/fug: Grenthe, I., Fuger, J., Konings, R.J.M., Lemire, R.J., Muller, A.B., Nguyen-Trung, C., and Wanner, H., 1992, Chemical Thermodynamics, Volume 1: Chemical Thermodynamics of Uranium:  North-Holland, Amsterdam, 1, 714p. (4 U solutes, 21 U solids)
 # 90how/joh: http://dx.doi.org/10.1016/S0144-2449(05)80307-0 (Stilbite)
-# 82joh/flo: Johnson, G.K., Flotow, H.E., O'Hare, P.A.G., and Wise, W.S., 1982, Thermodynamic studies of zeolites: Analcime and dehydrated analcime:  Amer. Mineral., 67, 736-748. (Analcime)
-# 83joh/flo: Johnson, G.K., Flotow, H.E., O'Hare, P.A.G., and Wise, W.S., 1983, Thermodynamic studies of zeolites: Natrolite, mesolite, and scolecite:  Amer. Mineral., 68, 1134-1145. (Natrolite, Scolecite)
-# 91joh/tas: http://dx.doi.org/10.1016/S0021-9614(05)80135-1 (Mordenite)
 # 75kas/bor: Kashkay, C.H.M., Borovskaya,Y.U.B., and Babazade, M.A., 1975, Determination of delG0f298K of synthetic jarosite and its sulfate analogues:  Geochem. Intl., 12, 115-121. (Jarosite)
 # 87kee/rup: Kee, R.J., Rupley, F.M., and Miller, J.A., 1987, The Chemkin thermodynamic database:  SNL Rep. SAND-87-8215, 92p. (Ice)
 # 78lan: http://dx.doi.org/10.1016/0016-7037(78)90001-7 (Bassetite, Ningyoite, Saleeite)
@@ -2748,17 +2745,6 @@ Amesite-14A
 #	Extrapol	Cp integration
 #	Ref		78wol
 
-Analcime
-	Na.96Al.96Si2.04O6:H2O + 3.84 H+ = 0.96 Al+3 + 0.96 Na+ + 2.04 SiO2 + 2.92 H2O
-	log_k		6.1396
-	-delta_H	-75.844		kJ/mol
-#	deltafH		-3296.86	kJ/mol
-	-analytic	-6.8694 6.6052e-3 9.8260e3 -4.8540 -8.8780e5
-#	Range		0-350
-	-Vm		97.1 # 96.8 in thermo.com.V8.R6+.tdat
-#	Extrapol	supcrt92, Cp integration
-#	Ref		HDN+78, 82joh/flo match but differ from Wilson+06 by 1 log K at 0C, 0 log K a 300C
-
 Andalusite
 	Al2SiO5 + 6 H+ = SiO2 + 2 Al+3 + 3 H2O
 	log_k		15.9445
@@ -3352,17 +3338,6 @@ Clinochlore-7A
 #	Extrapol	supcrt92
 #	Ref		HDN+78
 
-Clinoptilolite-Ca
-	Ca1.7335Al3.45Fe.017Si14.533O36:10.922H2O + 13.868 H+ = 0.017 Fe+3 + 1.7335 Ca+2 + 3.45 Al+3 + 14.533 SiO2 + 17.856 H2O
-	log_k		-7.0095
-	-delta_H	-74.6745	kJ/mol 
-#	deltafH		-4919.84	kcal/mol
-	-analytic	-4.4820e1 5.3696e-2 5.4878e4 -3.1459e1 -7.5491e6
-#	Range		0-300
-	-Vm		625.19 # Webmineral.com, density 2.15
-#	Extrapol	Cp integration
-#	Ref		89db 7
-
 Clinoptilolite-K
 	K3.467Al3.45Fe.017Si14.533O36:10.922H2O + 13.868 H+ = 0.017 Fe+3 + 3.45 Al+3 + 3.467 K+ + 14.533 SiO2 + 17.856 H2O
 	log_k		-10.9485
@@ -3371,17 +3346,6 @@ Clinoptilolite-K
 	-analytic	1.1697e1 6.9480e-2 4.7718e4 -4.7442e1 -7.6907e6
 #	Range		0-300
 	-Vm		655.93 # Webmineral.com, density 2.15
-#	Extrapol	Cp integration
-#	Ref		89db 7
-
-Clinoptilolite-Na
-	Na3.467Al3.45Fe.017Si14.533O36:10.922H2O + 13.868 H+ = 0.017 Fe+3 + 3.45 Al+3 + 3.467 Na+ + 14.533 SiO2 + 17.856 H2O
-	log_k		-7.1363
-	-delta_H	2.32824		kJ/mol
-#	deltafH		-4912.36	kcal/mol
-	-analytic	-3.4572e1 6.8377e-2 5.1962e4 -3.3426e1 -7.5586e6
-#	Range		0-300
-	-Vm		629.95 # Webmineral.com, density 2.15
 #	Extrapol	Cp integration
 #	Ref		89db 7
 
@@ -4568,17 +4532,6 @@ Larnite
 #	Extrapol	Cp integration
 #	Ref		82sar/bar
 
-Laumontite
-	CaAl2Si4O12:4H2O + 8 H+ = Ca+2 + 2 Al+3 + 4 SiO2 + 8 H2O
-	log_k		13.6667
-	-delta_H	-184.657	kJ/mol
-#	deltafH		-1728.66	kcal/mol
-	-analytic	1.1904 8.1763e-3 1.9005e4 -1.4561e1 -1.5851e6
-#	Range		0-350
-	-Vm		207.55
-#	Extrapol	supcrt92
-#	Ref		HDN+78 differ by 1.7 log K at 0C, 0.1 log K at 350C
-
 Lawrencite
 	FeCl2 = Fe+2 + 2 Cl-
 	log_k		9.0945
@@ -4763,17 +4716,6 @@ Merwinite
 	-Vm		104.4
 #	Extrapol	supcrt92
 #	Ref		HDN+78
-
-Mesolite
-	Na.676Ca.657Al1.99Si3.01O10:2.647H2O + 7.96 H+ = 0.657 Ca+2 + 0.676 Na+ + 1.99 Al+3 + 3.01 SiO2 + 6.627 H2O
-	log_k		13.6191
-	-delta_H	-179.744	kJ/mol
-#	deltafH		-5947.05	kJ/mol
-	-analytic	7.1993 5.9356e-3 1.4717e4 -1.3627e1 -9.8863e5
-#	Range		0-300
-	-Vm		171.2 # thermo.com.V8.R6+.tdat
-#	Extrapol	Cp integration
-#	Ref		89db 6
 
 Mg
 	Mg + 2 H+ + 0.5 O2 = H2O + Mg+2
@@ -4995,17 +4937,6 @@ Montmor-Na
 #	Extrapol	supcrt92, Cp integration
 #	Ref		Catalano13, 88db 3 match, but differ from Wilson+06 by 3.4 log K at 0C, 1.7 log K at 300C
 
-Mordenite
-	Ca.2895Na.361Al.94Si5.06O12:3.468H2O + 3.76 H+ = 0.2895 Ca+2 + 0.361 Na+ + 0.94 Al+3 + 5.06 SiO2 + 5.348 H2O
-	log_k		-5.1969
-	-delta_H	16.7517		kJ/mol
-#	deltafH		-6736.64	kJ/mol
-	-analytic	-5.4675e1 3.2513e-2 2.3412e4 -1.0419 -3.2292e6
-#	Range		0-300
-	-Vm		209.90 # thermo.com.V8.R6+.tdat
-#	Extrapol	Cp integration
-#	Ref		91joh/tas
-
 Morenosite
 	NiSO4:7H2O = Ni+2 + SO4-2 + 7 H2O
 	log_k		-2.0140
@@ -5159,17 +5090,6 @@ Nantokite
 	-Vm		23.92 # thermo.com.V8.R6+.tdat
 #	Extrapol	Constant H approx
 #	Ref		WEP+82
-
-Natrolite
-	Na2Al2Si3O10:2H2O + 8 H+ = 2 Al+3 + 2 Na+ + 3 SiO2 + 6 H2O
-	log_k		18.5204
-	-delta_H	-186.971	kJ/mol
-#	deltafH		-5718.56	kJ/mol
-	-analytic	-2.7712e1 -2.7963e-3 1.6075e4 1.5332 -9.5765e5
-#	Range		0-300
-	-Vm		169.72 # HDN+78
-#	Extrapol	Cp integration
-#	Ref		83joh/flo
 
 Natron
 	Na2CO3:10H2O + H+ = HCO3- + 2 Na+ + 10 H2O
@@ -5816,17 +5736,6 @@ Schoepite
 #	Extrapol	Cp integration
 #	Ref		92gre/fug
 
-Scolecite
-	CaAl2Si3O10:3H2O + 8 H+ = Ca+2 + 2 Al+3 + 3 SiO2 + 7 H2O
-	log_k		15.8767
-	-delta_H	-204.93		kJ/mol
-#	deltafH		-6048.92	kJ/mol
-	-analytic	5.0656e1 -3.1485e-3 1.0574e4 -2.5663e1 -5.2769e5
-#	Range		0-300
-	-Vm		172.29 # thermo.com.V8.R6+.tdat
-#	Extrapol	Cp integration
-#	Ref		83joh/flo
-
 Sepiolite
 	Mg4Si6O15(OH)2:6H2O + 8 H+ = 4 Mg+2 + 6 SiO2 + 11 H2O
 	log_k		30.4439
@@ -6462,17 +6371,6 @@ Vaesite
 #	Extrapol	Constant H approx
 #	Ref		78vau/cra
 
-Wairakite
-	CaAl2Si4O10(OH)4 + 8 H+ = Ca+2 + 2 Al+3 + 4 SiO2 + 6 H2O
-	log_k		18.0762
-	-delta_H	-237.781	kJ/mol
-#	deltafH		-1579.33	kcal/mol
-	-analytic	-1.7914e1 3.2944e-3 2.2782e4 -9.0981 -1.6934e6
-#	Range		0-350
-	-Vm		186.87
-#	Extrapol	supcrt92
-#	Ref		HDN+78
-
 Wollastonite
 	CaSiO3 + 2 H+ = Ca+2 + H2O + SiO2
 	log_k		13.7605
@@ -6667,15 +6565,15 @@ Ferroactinolite
 	-Vm			284.20 # HP11
 
 Analcime 
-	Na0.96Al0.96Si2.04O6:1.02H2O = 0.96 AlO2- + 2.04 SiO2 + 0.96 Na+ + 1.02 H2O
-	log_k		-15.4601 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-analytic	1914.5135697141357 0.7594569710321251 -70718.88626027653 -775.9660557842909 2.5781688632032564e6    -0.0003165472546346094 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	Na0.96Al0.96Si2.04O6:1H2O = 0.96 AlO2- + 2.04 SiO2 + 0.96 Na+ + 1 H2O
+	log_k		-15.4836 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	501.50135880330583 0.4081706086110891 3004.9186724445826 -245.83715206913098 -1.9916185660392942e6 -0.00020301821850975092 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			97.43 # Neu00
 
 Chabazite-Ca
 	CaAl2Si4O12:6H2O = 2 AlO2- + Ca+2 + 4 SiO2 + 6 H2O
-	log_k		-30.8997 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-analytic	4742.204783535629 1.7133994266197394 -189808.24355521525 -1889.7397008589521 8.013375995015237e6 -0.0006911958732424432 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	log_k		-30.9549 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	1383.7193100522459 0.8962451487067343 -14541.799688228004 -631.7230568214625 -2.768970387142616e6 -0.0004365840473966547 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			247.45 # Neu00
 
 Chabazite-Na
@@ -6684,11 +6582,23 @@ Chabazite-Na
 	-analytic	1205.6412113409383 0.8534371734791106 -7398.492962800943 -562.2064462406677 -3.160528329606455e6 -0.00042079435650357107 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			247.45 # Neu00
 
+Clinoptilolite-Ca
+	Ca1.5Al3Si15O36:12H2O = 3 AlO2- + 1.5 Ca+2 + 15 SiO2 + 12 H2O
+	log_k		-75.0599 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	-3082.666682767671 0.6083371382774162 280731.8505741738 893.5581102678166 -2.430996012773996e7 -0.0005953910487784876 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			628.14 # Neu00
+
+Clinoptilolite-Na
+	Na3Al3Si15O36:10H2O = 3 AlO2- + 3 Na+ + 15 SiO2 + 10 H2O
+	log_k		-77.703 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	-3347.7849077379233 0.542453490633008 290434.35145050247 996.3878173338223 -2.494753429309686e7 -0.0005694849672011605 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			628.14 # Neu00
+
 Heulandite-Ca 
 	CaAl2Si7O18:6H2O = 2 AlO2- + Ca+2 + 7 SiO2 + 6 H2O
-	log_k		-42.2199 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-analytic	3589.7611836212627 1.4135332647180716 -143313.01485181923 -1448.5137538722959 5.840133134841645e6 -0.0006096863623534979 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-Vm			299.11 # Neu00
+	log_k		-42.296 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	-324.0921271812592 0.6620119486118866 86841.11248122861 -24.870109267789747 -9.61569410884967e6 -0.00041778974536955043 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			319.27 # Neu00
 
 Heulandite-Na
 	Na2Al2Si7O18:5H2O = 2 AlO2- + 2 Na+ + 7 SiO2 + 5 H2O
@@ -6696,35 +6606,71 @@ Heulandite-Na
 	-analytic	-500.41282657557826 0.6193175864194332 94942.22438159939 43.17854610127076 -1.0041543689703956e7 -0.0004017969127716305 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			314.27 # Neu00
 
+Laumontite 
+	CaAl2Si4O12:4.5H2O = 2 AlO2- + 4 SiO2 + 1 Ca+2 + 4.5 H2O
+	log_k		-30.9546 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	1439.7672733379281 0.9259000023795175 -14377.41523250254 -657.336438383739 -2.91825505051674e6 -0.0004408881544858278 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			209.68 # Neu00
+
+Leonhardite 
+	CaAl2Si4O12:4.5H2O = 2 AlO2- + 4 SiO2 + 1 Ca+2 + 3.5 H2O
+	log_k		-30.8577 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	1440.3885476528944 0.9244187243677101 -13898.156774885792 -657.9581613531033 -2.9343426705140783e6 -0.0004405585636181233 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			204.6 # Neu00
+
 Mesolite 
 	Ca0.667Na0.666Al2Si3O10:2.667H2O = 2 AlO2- + 0.667 Ca+2 + 3 SiO2 + 0.666Na+ + 2.667 H2O
-	log_k		-28.2605 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-analytic	3252.0759718224194 1.3208000300352611 -119329.90424149239 -1322.5035690603052 4.344862640660157e6 -0.0005661483847154495 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	log_k		-28.5861 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	1962.936437813693 0.998607144668664 -43958.223448379256 -845.1462240667506 -960903.5706246386 -0.0004471851428199104 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			171.60 # Neu00
 
-Natrolite 
+Mordenite-Ca
+	Ca0.5AlSi5O12:4H2O = 1 AlO2- + 0.5 Ca+2 + 5 SiO2 + 4 H2O
+	log_k		-29.9377 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	-1013.7653003955133 0.21245095372381667 92753.67567893346 290.6329277938708 -8.188477791744676e6 -0.0001985362489229726 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			208.74 # Neu00
+
+Mordenite-Na
+	NaAlSi5O12:3H2O = 1 AlO2- + 1 Na+ + 5 SiO2 + 3 H2O
+	log_k		-24.5097 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	-1108.089941870995 0.1876989863094441 98060.26657922301 327.4151080166033 -8.408840320021803e6 -0.00018956016067959744 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			208.74 # Neu00
+
+Natrolite
 	Na2Al2Si3O10:2H2O = 2 AlO2- + 3 SiO2 + 2 Na+ + 2 H2O
-	log_k		-26.5297 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-analytic	3029.0783860430547 1.2640229970114263 -108964.57482964726 -1236.9802203780137 3.761821325153759e6 -0.0005455861097037653 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	log_k		-26.5741 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	1794.8257187466863 0.955682600375344 -38292.57800860805 -778.400877930612 -1.1977502110506492e6 -0.00043115074325427924 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			169.22 # Neu00
 
-Scolecite 
+Scolecite
 	CaAl2Si3O10:3H2O = 2 AlO2- + Ca+2 + 3 SiO2 + 3 H2O
-	log_k		-29.1399 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-analytic	3931.8512324095364 1.5087129159304111 -149284.08880367785 -1584.1955928895843 5.82353735726294e6  -0.0006258651348268484 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	log_k		-29.1836 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	1919.8525235072343 0.9893467644480903 -43700.88846539688 -827.5527603142837 -882013.1551829757 -0.00044760213755503465 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			172.29 # Neu00
 
-Stilbite-Ca 
+Stilbite-Ca
 	CaAl2Si7O18:7H2O = 2 AlO2- + Ca+2 + 7 SiO2 + 7 H2O
-	log_k		-42.4096 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-analytic	2678.646229569424 1.1768779764089885 -101397.4288077477 -1101.5966057106805 3.7123874752740418e6    -0.0005375720326345278 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	log_k		-42.4809 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	-308.02818193890664 0.6677167259204363 85986.86633583212 -31.38839911729013 -9.531527424132269e6 -0.00041669116376171915 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			333.48 # Neu00
 
-Thomsonite 
+Thomsonite
 	Ca2NaAl5Si5O20:6H2O = 5 AlO2- + 2 Ca+2 + 5 SiO2 + Na+ + 6 H2O
-	log_k		-60.9298 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-analytic	12905.920998273474 4.538691769573849 -511364.92267222056 -5129.317898547995 2.165727176279924e7 -0.0017594611370076118 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	log_k		-61.6593 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	6597.100414990126 2.755974516191939 -205318.01454206702 -2721.4298250119004 3.8817297577828313e6 -0.0011415922537272435 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			338.10 # Neu00
+
+Wairakite
+	CaAl2Si4O12:2H2O = 2 AlO2- + 4 SiO2 + 1 Ca+2 + 2 H2O
+	log_k		-27.0054 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	1373.5123225977059 0.9161283236770602 -7532.542785604329 -635.8739049327534 -3.177521495478817e6 -0.00044123946498206116 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			190.35 # Neu00
+
+Yugawaralite
+	CaAl2Si6O16:4H2O = 2 AlO2- + 6 SiO2 + 1 Ca+2 + 4 H2O
+	log_k		-37.7497 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	285.2919589198712 0.7583154302448133 53535.741828271166 -245.42267032340337 -7.422215243792683e6 -0.00042652351915267977 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			265.79 # Neu00
 
 #----------
 # 15 gases
