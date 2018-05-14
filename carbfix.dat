@@ -168,6 +168,7 @@ E	e-	0	0	0
 Eu	Eu+3	0	Eu	151.965
 Eu(+2)	Eu+2	0	Eu	
 Eu(+3)	Eu+3	0	Eu	
+F	F-	0.0	F	18.9984
 Fe	Fe+2	0	Fe	55.847
 Fe(+2)	Fe+2	0	Fe	
 Fe(+3)	Fe+3	-2	Fe	
@@ -283,6 +284,13 @@ Eu+3 = Eu+3
 	-delta_H	0		kJ/mol
 #	deltafH		-144.7		kcal/mol
 	-Vm		-3.1037 -15.3599 11.7871 -2.144 2.3161 0 0 0 0 0 # SH88
+
+F- =  F- 
+	-llnl_gamma	3.5000
+	log_k		0
+	-delta_H	0		kJ/mol
+#	deltafH		-80.15 kcal/mol
+	-Vm		0.928 1.36 6.27 -2.84 1.84 0 0 -0.318 0 1 # APP14
 
 Fe+2 = Fe+2 
 	-llnl_gamma	6	
@@ -6613,7 +6621,7 @@ Laumontite
 	-Vm			209.68 # Neu00
 
 Leonhardite 
-	CaAl2Si4O12:4.5H2O = 2 AlO2- + 4 SiO2 + 1 Ca+2 + 3.5 H2O
+	CaAl2Si4O12:3.5H2O = 2 AlO2- + 4 SiO2 + 1 Ca+2 + 3.5 H2O
 	log_k		-30.8577 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-analytic	1440.3885476528944 0.9244187243677101 -13898.156774885792 -657.9581613531033 -2.9343426705140783e6 -0.0004405585636181233 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			204.6 # Neu00
