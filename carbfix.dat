@@ -6921,8 +6921,8 @@ https://doi.org/10.1016/S0016-7037(03)00176-5)
 #Parameter 2: 25500 (J/mol)
 #Parameter 3: Initial geometric surface area in cm2
 RATES
-    BG_Stapafell
--start
+BG_Stapafell
+ -start
  10 A0 = PARM(3)
  20 sr_BG = SR("Stapafell_Iwona")
  25 if (M<=0) then goto 200
@@ -6936,5 +6936,5 @@ RATES
  70 moles = rate * TIME
  75 PUT(area,1)
  80 PUT(rate,2)
-200 SAVE moles
--end
+ 200 SAVE moles
+ -end
