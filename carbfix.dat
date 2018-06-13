@@ -6699,6 +6699,21 @@ Yugawaralite
 	-analytic	285.2919589198712 0.7583154302448133 53535.741828271166 -245.42267032340337 -7.422215243792683e6 -0.00042652351915267977 # Neu00 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			265.79 # Neu00
 
+#---------------------------
+# carbfix.dat - Stapafell additions and changes
+#---------------------------
+
+#Basaltic glass leached layer solubility - calculated (Iwona Galeczka, personal communication)
+Stapafell_Iwona
+	Si1.00Al0.35O2(OH)1.05 + 1.05 H+ = 0.35 Al+3 + 1.05 H2O + SiO2
+	log_k		1.07
+	delta_h		-24.83 kJ
+
+Al(OH)3(am)
+	Al(OH)3 + OH- = AlO2- + 2 H2O
+	log_k		1.0715
+	delta_h		5.5 kJ
+
 #----------
 # 15 gases
 #----------
@@ -6893,3 +6908,33 @@ SO2(g)
 	-Omega		0.251 # http://webserver.dmt.upm.es/~isidoro/dat1/eGAS.pdf
 #	Extrapol	supcrt92
 #	Ref		WEP+82, Kel60
+
+#---------------------------
+# carbfix.dat - Stapafell additions and changes
+#---------------------------
+
+#Basaltic glass (Stapafell) dissolution rate
+#Use with this basaltic glass stoichiometry: Si1.000Ti0.024Al0.358Fe0.188Mg0.281Ca0.264Na0.079K0.008O3.370
+#Based on Gislason & Oelkers (2003), GCA (
+https://doi.org/10.1016/S0016-7037(03)00176-5)
+#Parameter 1: 2.5e-6 (mol of Si / cm2 / s)
+#Parameter 2: 25500 (J/mol)
+#Parameter 3: Initial geometric surface area in cm2
+RATES
+    BG_Stapafell
+-start
+ 10 A0 = PARM(3)
+ 20 sr_BG = SR("Stapafell_Iwona")
+ 25 if (M<=0) then goto 200
+ 30 R = 8.3144
+ 35 T = 273.15+TC
+ 45 area = (M/M0)^(2/3)*A0
+ 50 rate_const = PARM(1)*EXP(-PARM(2)/(R*T))
+ 54 DF = ((ACT ("H+")^3)/(ACT("Al+3")))^(1/3)
+ 55 rate = rate_const*DF*(1-sr_BG)
+ 65 rate = rate * area
+ 70 moles = rate * TIME
+ 75 PUT(area,1)
+ 80 PUT(rate,2)
+200 SAVE moles
+-end
