@@ -1,4 +1,4 @@
-# carbfix.dat - created May 04, 2018, last edited May 14, 2018.
+# carbfix.dat - created May 04, 2018, last edited June 13, 2018.
 # The latest carbfix.dat version is available from https://github.com/martinvoigt/CarbFix
 #
 # The carbfix.dat thermodynamic database for PHREEQC is based on the core10.dat database, which is available at https://github.com/MarcNeveu/IcyDwarf/.
@@ -54,6 +54,7 @@
 # SM93: http://dx.doi.org/10.1006/icar.1993.1185 (CO, CO(NH2)2, HCN solutes)
 # SSB97: http://dx.doi.org/10.1016/S0016-7037(97)00240-8 (UO2OH+, Uraninite)
 # SSH97: http://dx.doi.org/10.1016/S0016-7037(97)00009-4 (30 solutes)
+# SSW+97: https://doi.org/10.1016/S0016-7037(96)00339-0
 # SSW01: http://dx.doi.org/10.1016/S0016-7037(01)00717-7 (CO2, H2S)
 # Ste01: http://dx.doi.org/10.1016/S0009-2541(00)00263-1 (Ti(OH)4)
 # Wat81: “Ammonium Aluminosilicates: The Examination of a Mechanism for the High Temperature Condensation of Ammonia in Circumplanetary Subnebulae” MS Thesis, MIT, 1981. (NH4-feldspar, NH4-muscovite)
@@ -2560,7 +2561,7 @@ Zn+2 + SO4-2 = ZnSO4
 # carbfix.dat additions and changes
 #---------------------------
 
-1.0000 H2O + 1.0000 Al+++  =  AlO+ +2.0000 H+
+H2O + Al+++  =  AlO+ + 2 H+
 	-llnl_gamma	4.0
 	log_k		-10.5945 # llnl.dat
 	-analytic	4.4036e+001 2.0168e-002 -5.5455e+003 -1.6987e+001 -8.6545e+001 # llnl.dat
@@ -2606,7 +2607,25 @@ Na+ + SO4-2 = NaSO4-
 	log_k		0.702779 # MS97 + CHNOSZ/OBIGT/SUPCRTBL - D08
 	-analytic	-1515.4130255698833 -0.5496881710640973 53009.74446438346 607.5403646933713 -1.7958467164664706e6 0.00021478523226344507 # MS97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-Vm			1e-5 16.4 -0.0678 -1.05 4.14 0 6.86 0 0.0242 0.53 # APP14
- 
+
+Fe+3 + H2O = FeO+ + 2H+
+	-llnl_gamma	4.0
+	log_k		-5.6502 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	-311.3248470052558 -0.1252808696431922 9665.364708433648 127.49811415837463 -849396.8730633351 0.00005263379396466626 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			-3.7118 -16.8408 12.3595 -2.0827 0.7191 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+
+Fe+3 + 2 H2O = HFeO2 + 3H+
+	-llnl_gamma	3.0
+	log_k		-12.0185 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	-741.3725966104283 -0.26505708328056 26205.378230673232 296.5340355414264 -1.972081032472368e6 0.00010032479998977653 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			2.7401 -1.0905 6.1776 -2.7338 -0.03 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+
+Fe+3 + 2 H2O = FeO2- + 4H+
+	-llnl_gamma	4.0
+	log_k		-21.6225 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	1533.5014901840032 0.45075510400897445 -69859.23735739749 -593.4694075764281 2.3641904800567343e6 -0.00014964010950998835 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			2.3837 -1.9602 6.5182 -2.6979 1.4662 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+
 PHASES
 
 #------------
