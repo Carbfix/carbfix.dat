@@ -1,4 +1,4 @@
-# carbfix.dat - created May 04, 2018, last edited June 13, 2018.
+# carbfix.dat - created May 04, 2018, last edited June 14, 2018.
 # "Stapafell" version with inofficial additions.
 # The latest carbfix.dat version is available from https://github.com/martinvoigt/CarbFix
 #
@@ -91,12 +91,15 @@
 #
 # Additional carbfix.dat references
 # D08: http://dx.doi.org/10.1186/1467-4866-9-10
+# DEW17: Deep Earth Water (DEW) spreadsheet http://www.dewcommunity.org
 # HP11: http://dx.doi.org/10.1111/j.1525-1314.2010.00923.x
 # Neu00: Neuhoff P.S., 2000, Thermodynamic Properties and Parageneses of Rock-Forming Zeolites. PhD Thesis. Stanford University.
 # SBS13: http://dx.doi.org/10.1016/j.gca.2013.04.023
 # SBS14: http://dx.doi.org/10.1016/j.gca.2014.04.008
 # MS97: http://dx.doi.org/10.1016/S0016-7037(97)00241-X
 # P+96: http://dx.doi.org/10.1016/0016-7037(96)00123-8
+# SK95: https://doi.org/10.1016/0016-7037(95)00058-8
+# TS01: http://dx.doi.org/10.1016/S0016-7037(01)00705-0
 # Z+16: http://dx.doi.org/10.1016/j.cageo.2016.02.013
 #
 # Species have various valid temperature ranges, noted in the Range parameter. Currently, Phreeqc doesn’t use this parameter, so it is up to the user to remain in the valid temperature range for all data used.
@@ -2566,30 +2569,30 @@ H2O + Al+++  =  AlO+ + 2 H+
 	-llnl_gamma	4.0
 	log_k		-10.5945 # llnl.dat
 	-analytic	4.4036e+001 2.0168e-002 -5.5455e+003 -1.6987e+001 -8.6545e+001 # llnl.dat
-	-Vm			2.1705 -2.4811 6.7241 -2.6763 0.95700 0 0 0 0 0 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			2.1705 -2.4811 6.7241 -2.6763 0.95700 0 0 0 0 0 # SSW+97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 
 Al+++ + SiO2 + 2 H2O = AlH3SiO4+2 + H+
 	log_k		-2.38 # P+96
 	-analytic	5.241793953846094 0.005624769230769303 -2772.442855034987 0 0 0 # P+96
-	-Vm			0.16 -7.23 8.61 -2.4800 0.88000 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			0.16 -7.23 8.61 -2.4800 0.88000 # TS01 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 
 Mg+2 + CO3-2 = MgCO3
 	-llnl_gamma	3.0
 	log_k		3.01 # SBS14
 	-analytic	5.5093 -0.00017143 -734.208 0 0 0 # SBS14
-	-Vm			-0.7355 -9.5745 9.5062 -2.3831 -0.038 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			-0.7355 -9.5745 9.5062 -2.3831 -0.038 # SSH97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 
 Mg+2 + HCO3- = MgHCO3+
 	-llnl_gamma	4.0
 	log_k		1.10 # SBS14
 	-analytic	-8.8935 0.01694 1474.786 0 0 0 # SBS14
-	-Vm			3.271 0.206 5.669 -2.7880 0.59900 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			3.271 0.206 5.669 -2.7880 0.59900 # SK95 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 
 Na+ + CO3-2 = NaCO3-
 	-llnl_gamma	4.0
 	log_k		1.01 # SBS13
 	-analytic	4.1659 0 -941.150 0 0 0 # SBS13
-	-Vm			7.642732 2.993503 2.328077 -2.902751 1.507948 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			7.642732 2.993503 2.328077 -2.902751 1.507948 # DEW17 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 
 Na+ + HCO3- = NaHCO3
 	-llnl_gamma	3.0
@@ -2601,7 +2604,7 @@ HCO3- + Ca+2 = CaHCO3+
 	-llnl_gamma	4.0
 	log_k		1.0467 # llnl.dat
 	-analytic	5.5985e+001 3.4639e-002 -3.6972e+002 -2.5864e+001 -5.7859e+000 # llnl.dat
-	-Vm			3.706 1.267 5.252 -2.8310 0.30800 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			3.706 1.267 5.252 -2.8310 0.30800 # SK95 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 
 Na+ + SO4-2 = NaSO4-
 	-llnl_gamma	4.0
@@ -2611,21 +2614,21 @@ Na+ + SO4-2 = NaSO4-
 
 Fe+3 + H2O = FeO+ + 2H+
 	-llnl_gamma	4.0
-	log_k		-5.6502 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-analytic	-311.3248470052558 -0.1252808696431922 9665.364708433648 127.49811415837463 -849396.8730633351 0.00005263379396466626 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-Vm			-3.7118 -16.8408 12.3595 -2.0827 0.7191 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	log_k		-5.6502 # SSW+97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	-311.3248470052558 -0.1252808696431922 9665.364708433648 127.49811415837463 -849396.8730633351 0.00005263379396466626 # SSW+97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			-3.7118 -16.8408 12.3595 -2.0827 0.7191 # SSW+97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 
 Fe+3 + 2 H2O = HFeO2 + 3H+
 	-llnl_gamma	3.0
-	log_k		-12.0185 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-analytic	-741.3725966104283 -0.26505708328056 26205.378230673232 296.5340355414264 -1.972081032472368e6 0.00010032479998977653 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-Vm			2.7401 -1.0905 6.1776 -2.7338 -0.03 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	log_k		-12.0185 # SSW+97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	-741.3725966104283 -0.26505708328056 26205.378230673232 296.5340355414264 -1.972081032472368e6 0.00010032479998977653 # SSW+97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			2.7401 -1.0905 6.1776 -2.7338 -0.03 # SSW+97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 
 Fe+3 + 2 H2O = FeO2- + 4H+
 	-llnl_gamma	4.0
-	log_k		-21.6225 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-analytic	1533.5014901840032 0.45075510400897445 -69859.23735739749 -593.4694075764281 2.3641904800567343e6 -0.00014964010950998835 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
-	-Vm			2.3837 -1.9602 6.5182 -2.6979 1.4662 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	log_k		-21.6225 # SSW+97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	1533.5014901840032 0.45075510400897445 -69859.23735739749 -593.4694075764281 2.3641904800567343e6 -0.00014964010950998835 # SSW+97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm			2.3837 -1.9602 6.5182 -2.6979 1.4662 # SSW+97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 
 PHASES
 
@@ -6916,26 +6919,25 @@ SO2(g)
 
 #Basaltic glass (Stapafell) dissolution rate
 #Use with this basaltic glass stoichiometry: Si1.000Ti0.024Al0.358Fe0.188Mg0.281Ca0.264Na0.079K0.008O3.370
-#Based on Gislason & Oelkers (2003), GCA (
-https://doi.org/10.1016/S0016-7037(03)00176-5)
+#Based on Gislason & Oelkers (2003), GCA (https://doi.org/10.1016/S0016-7037(03)00176-5)
 #Parameter 1: 2.5e-6 (mol of Si / cm2 / s)
 #Parameter 2: 25500 (J/mol)
 #Parameter 3: Initial geometric surface area in cm2
 RATES
 BG_Stapafell
- -start
- 10 A0 = PARM(3)
- 20 sr_BG = SR("Stapafell_Iwona")
- 25 if (M<=0) then goto 200
- 30 R = 8.3144
- 35 T = 273.15+TC
- 45 area = (M/M0)^(2/3)*A0
- 50 rate_const = PARM(1)*EXP(-PARM(2)/(R*T))
- 54 DF = ((ACT ("H+")^3)/(ACT("Al+3")))^(1/3)
- 55 rate = rate_const*DF*(1-sr_BG)
- 65 rate = rate * area
- 70 moles = rate * TIME
- 75 PUT(area,1)
- 80 PUT(rate,2)
- 200 SAVE moles
- -end
+	-start
+	10 A0 = PARM(3)
+	20 sr_BG = SR("Stapafell_Iwona")
+	25 if (M<=0) then goto 200
+	30 R = 8.3144
+	35 T = 273.15+TC
+	45 area = (M/M0)^(2/3)*A0
+	50 rate_const = PARM(1)*EXP(-PARM(2)/(R*T))
+	54 DF = ((ACT ("H+")^3)/(ACT("Al+3")))^(1/3)
+	55 rate = rate_const*DF*(1-sr_BG)
+	65 rate = rate * area
+	70 moles = rate * TIME
+	75 PUT(area,1)
+	80 PUT(rate,2)
+	200 SAVE moles
+	-end
