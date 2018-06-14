@@ -1,6 +1,6 @@
 # carbfix.dat - created May 04, 2018, last edited June 14, 2018.
 # "Stapafell" version with inofficial additions.
-# The latest carbfix.dat version is available from https://github.com/martinvoigt/CarbFix
+# The latest carbfix.dat version is available from https://github.com/CarbFix/carbfix.dat
 #
 # The carbfix.dat thermodynamic database for PHREEQC is based on the core10.dat database, which is available at https://github.com/MarcNeveu/IcyDwarf/.
 # This version is based on https://github.com/MarcNeveu/IcyDwarf/blob/68728be1eda9cf78a576c8a09a243c8550b09579/IcyDwarf/PHREEQC-3.1.2/core10.dat, downloaded from GitHub on May 04, 2018.
