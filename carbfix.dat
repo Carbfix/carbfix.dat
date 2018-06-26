@@ -7040,7 +7040,7 @@ RATES
 BG_Stapafell
 	-start
 	10 A0 = PARM(3)
-	20 sr_BG = SR("Stapafell_Iwona")
+	20 sr_BG = SR("Stapafell_Martin")
 	25 if (M<=0) then goto 200
 	30 R = 8.3144
 	35 T = 273.15+TC
