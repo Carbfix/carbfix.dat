@@ -6788,14 +6788,14 @@ Al(OH)3(am)
 
 #Imogelite (synthetic)
 #NOTE: The analytical expression was calculated assuming a constant Cp, so that significant systematic errors occur at high temperatures!
-Imogelite(syn)
+Imogolite(syn)
 	Al2SiO3(OH)4 + 3 H2O = 2 Al(OH)4- + 2 H+ + SiO2
 	log_k		-33.2961 # SG01 (SH94, SH96, CWM89) + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-analytic	2890.080967689397 1.0927439915176265 -107321.16008441785 -1168.0627430328354 3.4587926155107003e6 -0.0004256340518557413 # SG01 (SH94, SH96, CWM89 - constant Cp) + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 
-#Imogelite (natural)
+#Imogolite (natural)
 #NOTE: The analytical expression was calculated assuming a constant Cp, so that significant systematic errors occur at high temperatures!
-Imogelite(nat)
+Imogolite(nat)
 	Al2SiO3(OH)4 + 3 H2O = 2 Al(OH)4- + 2 H+ + SiO2
 	log_k		-32.781 # SG01 (SH94, SH96, CWM89) + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 	-analytic	2889.4053206818276 1.0926086889953117 -107097.04060934501 -1167.8648975538597 3.457575673876792e6 -0.00042559476461498526 # SG01 (SH94, SH96, CWM89 - constant Cp) + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
