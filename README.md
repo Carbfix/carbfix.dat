@@ -1,4 +1,3 @@
-=======
 # carbfix.dat - Stapafell branch
 The carbfix.dat thermodynamic database for the [PHREEQC](https://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc/) geochemical modelling software.
 
@@ -16,11 +15,10 @@ Current features of carbfix.dat include:
 **This "Stapafell" version contains inofficial additions relevant to basalt:**
 * Calculated solubility of leached layer basaltic glass from Stapafell, Iceland
 * Expression for the dissolution rate of Stapafell basaltic glass
-* Solubilities of amorphous Al(OH)~3~, imogolite, allophane, amorphous goethite, and moganite
+* Solubilities of amorphous Al(OH)<sub>3</sub>, imogolite, allophane, amorphous goethite, and moganite
 
 For a detailed description of carbfix.dat, and for citing the source when using it in your own work, please refer to:
 
 *Voigt, M., Marieni, C., Clark, D.E., Gíslason, S.R., and Oelkers, E.H. "Evaluation and refinement of thermodynamic databases for mineral carbonation" Energy Procedia (2018), accepted.*
 
 This work has been carried out within the [CarbFix2](http://carbfix.com) project that has received funding from the European Union’s Horizon 2020 research and innovation program under grant agreement No 764760.
->>>>>>> master
