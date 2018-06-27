@@ -15,3 +15,5 @@ Current features of carbfix.dat include:
 For a detailed description of carbfix.dat, and for citing the source when using it in your own work, please refer to:
 
 *Voigt, M., Marieni, C., Clark, D.E., Gíslason, S.R., and Oelkers, E.H. "Evaluation and refinement of thermodynamic databases for mineral carbonation" Energy Procedia (2018), accepted.*
+
+This work has been carried out within the [CarbFix2](http://carbfix.com) project that has received funding from the European Union’s Horizon 2020 research and innovation program under grant agreement No 764760.
