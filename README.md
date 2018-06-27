@@ -1,4 +1,26 @@
+=======
 # carbfix.dat - Stapafell branch
-The carbfix.dat thermodynamic database for PHREEQC
+The carbfix.dat thermodynamic database for the [PHREEQC](https://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc/) geochemical modelling software.
 
-This "Stapafell" version contains inofficial additions relevant to basalt!
+This database is built upon the [core10.dat](https://github.com/MarcNeveu/IcyDwarf/) database, which is in turn based on the llnl.dat database shipped with PHREEQC.
+
+Current features of carbfix.dat include:
+* All the data of core10.dat - thermodynamic data for a vast number of minerals and aqueous species
+* 18 zeolite group miners
+* Re-calibrated solubilities of siderite and dolomite
+* New data for stabilities of aqueous metal-carbonate complexes
+* Data for stabilities of aqueous iron-hydroxide complexes
+* Additional data for stabilities of various other aqueous species
+* Some bugfixes
+
+**This "Stapafell" version contains inofficial additions relevant to basalt:**
+* Calculated solubility of leached layer basaltic glass from Stapafell, Iceland
+* Expression for the dissolution rate of Stapafell basaltic glass
+* Solubilities of amorphous Al(OH)~3~, imogolite, allophane, amorphous goethite, and moganite
+
+For a detailed description of carbfix.dat, and for citing the source when using it in your own work, please refer to:
+
+*Voigt, M., Marieni, C., Clark, D.E., Gíslason, S.R., and Oelkers, E.H. "Evaluation and refinement of thermodynamic databases for mineral carbonation" Energy Procedia (2018), accepted.*
+
+This work has been carried out within the [CarbFix2](http://carbfix.com) project that has received funding from the European Union’s Horizon 2020 research and innovation program under grant agreement No 764760.
+>>>>>>> master
