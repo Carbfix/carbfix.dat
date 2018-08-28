@@ -1,11 +1,12 @@
-# carbfix.dat - created May 04, 2018, last edited June 26, 2018.
+# carbfix.dat - created May 04, 2018, last edited August 28, 2018.
 # "Stapafell" version with inofficial additions.
 # The latest carbfix.dat version is available from https://github.com/CarbFix/carbfix.dat
 #
 # The carbfix.dat thermodynamic database for PHREEQC is based on the core10.dat database, which is available at https://github.com/MarcNeveu/IcyDwarf/.
 # This version is based on https://github.com/MarcNeveu/IcyDwarf/blob/68728be1eda9cf78a576c8a09a243c8550b09579/IcyDwarf/PHREEQC-3.1.2/core10.dat, downloaded from GitHub on May 04, 2018.
 #
-# Reference for carbfix.dat database description: xxx
+# Reference for carbfix.dat database description: Voigt M., Marieni C., Clark D. E., Gíslason S. R., and Oelkers E. H. (2018) Evaluation and refinement of thermodynamic databases for mineral carbonation. Energy Procedia 146, 81-91. http://dx.doi.org/10.1016/j.egypro.2018.07.012
+
 # Reference for core10.dat database description: Neveu M., Desch S. J., Castillo-Rogez J. C. (2017) Aqueous geochemistry in icy world interiors: Equilibrium fluid, rock, and gas compositions, and fate of antifreezes and radionuclides. Geochimica et Cosmochimica Acta 212, 324-371. http://dx.doi.org/10.1016/j.gca.2017.06.023
 #
 # Extrapolation algorithms:
