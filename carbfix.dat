@@ -202,10 +202,8 @@ Mn(+3)	Mn+3	0	Mn
 Mn(+6)	MnO4-2	0	Mn	
 Mn(+7)	MnO4-	0	Mn	
 Mo	MoO4-2	0	Mo	95.94
-N	NH3	1	N	14.0067
-N(-3)	NH3	1	N	
-N(0)	N2	0	N	
-N(+3)	NO2-	0	N	
+N	NO3-	0	N	14.0067
+Amm	Amm	1	N	17.031
 N(+5)	NO3-	0	N	
 Na	Na+	0	Na	22.9898
 Ni	Ni+2	0	Ni	58.69
@@ -377,7 +375,14 @@ MoO4-2 = MoO4-2
 #	deltafH		-238.5		kcal/mol
 	-Vm		6.9651 2.7095 18.6617 -2.8909 3.07770 0 0 0 0 0 # SSW+97
 
-NH3 = NH3 
+Amm = Amm 
+	-llnl_gamma	3	
+	log_k		0
+	-delta_H	0		kJ/mol
+#	deltafH		-19.44		kcal/mol
+	-Vm		5.0911 2.797 8.6248 -2.8946 -7.690e-2 0 0 0 0 0 # SHS89
+
+NO3- = NO3- 
 	-llnl_gamma	3	
 	log_k		0
 	-delta_H	0		kJ/mol
@@ -705,39 +710,6 @@ Mn+2 + H+ + 0.25 O2 = Mn+3 + 0.5 H2O
 #	Extrapol	supcrt92
 #	Ref		SSW+97, SH88
 
-2 NH3 + 1.5 O2 = N2 + 3 H2O  
-	-llnl_gamma	3.0    
-	log_k		116.4609
-	-delta_H	-687.08		kJ/mol
-#	deltafH		-2.495		kcal/mol
-	-analytic	-8.2621e1 -1.4671e-2 4.0068e4 2.9090e1 -2.5924e5
-#	Range		0-350
-	-Vm		6.2046 7.3685 2.8539 -3.0836 -0.34680
-#	Extrapol	supcrt92
-#	Ref		SHS89
-
-1.5 O2 + NH3 = NO2- + H+ + H2O 
-	-llnl_gamma	3.0    
-	log_k		+46.8653
-	-delta_H	-290.901	kJ/mol
-#	deltafH		-25		kcal/mol
-	-analytic	-1.7011e1 -3.3459e-2 1.3999e4 1.1078e1 -4.8255e4
-#	Range		0-350
-	-Vm		5.5864 5.859 3.4472 -3.0212 1.18470
-#	Extrapol	supcrt92
-#	Ref		SH88
-
-2 O2 + NH3 = NO3- + H+ + H2O 
-	-llnl_gamma	3.0    
-	log_k		62.1001
-	-delta_H	-387.045	kJ/mol
-#	deltafH		-49.429		kcal/mol
-	-analytic	-3.9468e1 -3.9697e-2 2.0614e4 1.8872e1 -2.1917e5
-#	Range		0-350
-	-Vm		7.3161 6.7824 -4.6838 -3.0594 1.09770
-#	Extrapol	supcrt92
-#	Ref		SH88
-
 2 H+ + 2 SO3-2 = S2O4-2 + .5 O2 + H2O
 	-llnl_gamma	5.0    
 	log_k		-25.2076
@@ -830,16 +802,6 @@ O2 + H+ + 3 HS- = S3-2 + 2 H2O
 	-Vm		8.8725 13.8806 0.2986 -3.3527 2.60760
 #	Extrapol	supcrt92
 #	Ref		SSW+97
-
-H+ + HCO3- + HS- + NH3 = SCN- + 3 H2O
-	-llnl_gamma	3.5    
-	log_k		3.0070
-#	deltafH		-0		kcal/mol
-	-analytic	0.16539e3 0.49623e-1 -0.44624e4 -0.65544e2 -0.69680e2
-#	Range		0-350
-	-Vm		7.0244 9.3687 2.0708 -3.1662 1.10730
-#	Extrapol	supcrt92, 64cri/cob
-#	Ref		SSW+97, 92gre/fug match
 
 SO4-2 = SO3-2 + 0.5 O2   
 	-llnl_gamma	4.5    
@@ -966,17 +928,6 @@ HCO3- = CO3-2 + H+
 #	Extrapol	supcrt92
 #	Ref		SH88
 
-NH3 + HCO3- = CN- + 2 H2O + 0.5 O2 
-	-llnl_gamma	3.0    
-	log_k		-56.0505
-	-delta_H	344.151		kJ/mol
-#	deltafH		36		kcal/mol
-	-analytic	-1.1174e1 3.8167e-3 -1.7063e4 4.5349e0 -2.6625e2
-#	Range		0-350
-	-Vm		5.4714 5.5813 3.5497 -3.0096 1.29000
-#	Extrapol	supcrt92
-#	Ref		SSW+97, SH88
-
 HCO3- + H+ = HCOOH + 0.5 O2
 	-llnl_gamma	3.0		# EQ3/6 data0.sup
 	log_k		-39.0524
@@ -1013,15 +964,6 @@ CH3COOH = CH3COO- + H+
 	-Vm		7.7525 8.6996 7.5825 -3.1385 1.31820
 #	Extrapol	supcrt92
 #	Ref		Sho95
-
-2 NH3 + HCO3- + H+ = CO(NH2)2 + 2 H2O
-	-llnl_gamma	3.0		# EQ3/6 data0.sup
-	log_k		6.631821
-	-analytic	15.98 -4.41e-2 0 0 0 4.25e-5
-#	Range		0-350
-	-Vm		7.7158 7.3031 10.9353 -3.0808 -0.3006
-#	Extrapol	supcrt92
-#	Ref		SM93
 
 3 H+ + 3 HCO3- + H2O = C3H8 + 5 O2
 	-llnl_gamma	3.0		# thermo.com.V8.R6+.tdat
@@ -1772,17 +1714,6 @@ HS- + H+ = H2S
 #	Extrapol	supcrt92
 #	Ref		SSW+97, 95pok/hel
  
-H+ + CN- = HCN
-	-llnl_gamma	3.0    
-	log_k		9.2359
-	-delta_H	-43.5136	kJ/mol
-#	deltafH		25.6		kcal/mol
-	-analytic	1.0536e1 2.3105e-2 3.3038e3 -7.7786 5.1550e1
-#	Range		0-350
-	-Vm		8.0083 11.7705 1.1286 -3.2655 -0.1113
-#	Extrapol	supcrt92
-#	Ref		SM93
-
 H+ + Cl- = HCl
 	-llnl_gamma	3.0    
 	log_k		-0.67
@@ -1803,17 +1734,6 @@ H+ + CrO4-2 = HCrO4-
 	-Vm		8.2211 12.2925 0.9174 -3.2871 0.923
 #	Extrapol	supcrt92
 #	Ref		SSW+97, SH88
-
-NO2- + H+ = HNO2
-	-llnl_gamma	3.0    
-	log_k		3.2206
-	-delta_H	-14.782		kJ/mol
-#	deltafH		-119.382	kJ/mol
-	-analytic	1.9653 -1.1603e-4 0 0 1.1569e5
-#	Range		0-350
-	-Vm		5.9151 6.659 3.1378 -3.0542 -0.1507
-#	Extrapol	supcrt92, 69hel
-#	Ref		SSW+97, WEP+82 match
 
 NO3- + H+ = HNO3
 	-llnl_gamma	3.0    
@@ -2068,18 +1988,7 @@ SO4-2 + Mn+2 = MnSO4
 #	Extrapol	supcrt92
 #	Ref		SSH97
  
-2 CH3COOH + NH3 = NH4(CH3COO)2- + H+
-	-llnl_gamma	4.0    
-	log_k		-0.1928
-	-delta_H	-56.735		kJ/mol
-#	deltafH		-265.2		kcal/mol
-	-analytic	3.7137e1 -1.2242e-2 -8.4764e3 -8.4308 1.3883e6
-#	Range		0-350
-	-Vm		19.3685 39.509 -9.7736 -4.4122 0.6495
-#	Extrapol	supcrt92
-#	Ref		SK93
-
-NH3 + H+ = NH4+
+Amm + H+ = AmmH+
 	-llnl_gamma	2.5    
 	log_k		9.2410
 	-delta_H	-51.9234	kJ/mol
@@ -2090,17 +1999,6 @@ NH3 + H+ = NH4+
 #	Extrapol	supcrt92
 #	Ref		SH88
 
-NH3 + CH3COOH = NH4CH3COO
-	-llnl_gamma	3.0    
-	log_k		4.6964
-	-delta_H	-48.911		kJ/mol
-#	deltafH		-147.23		kcal/mol
-	-analytic	1.4104e1 -4.3664e-3 -1.0746e3 -3.6999 4.1428e5
-#	Range		0-350
-	-Vm		11.2849 19.7719 -2.0187 -3.5963 -0.03
-#	Extrapol	supcrt92
-#	Ref		SK93
- 
 2 CH3COOH + Na+ = Na(CH3COO)2- + 2 H+
 	-llnl_gamma	4.0    
 	log_k		-9.9989
@@ -5226,42 +5124,6 @@ Nesquehonite
 #	Extrapol	supcrt92
 #	Ref		HDN+78
 
-NH4Cl 
-	NH4Cl = NH4+ + Cl-
-	log_k		1.3252
-	-analytic	-3.078 1.550e-2 0 0 0 -3.451e-6  
-#	Range		0-30
-	-Vm		34.96
-#	Extrapol	Marion+12
-#	Ref		Marion+12, WangLi11 match 
-
-NH4-feldspar # Buddingtonite (sometimes with +0.5 H2O, especially at low temp)
-	NH4AlSi3O8 + 4H+ = NH4+ + Al+3 + 3 SiO2 + 2 H2O
-	log_k		-2.7243
-	-analytic	-7.434e1 3.080e-1 0 0 0 -2.270e-4
-#	Range		25-325
-	-Vm		114.78 # Webmineral.com (Hovis04: 109.08-112.23)
-#	Extrapol	N17
-#	Ref		Wat81
-
-NH4HCO3
-	NH4HCO3 = NH4+ + HCO3-
-	log_k		-0.0207
-	-analytic	-1.587e1 9.703e-2 0 0 0 -1.472e-4
-#	Range		0-40
-	-Vm		50.04
-#	Extrapol	Marion+12
-#	Ref		Marion+12
-
-NH4-muscovite # Tobelite
-	NH4Al3Si3O10(OH)2 + 10 H+ = NH4+ + 3 Al+3 + 3 SiO2 + 6 H2O
-	log_k		6.8109
-	-analytical	-6.638e1 3.170e-1 0 0 0 -2.386e-4
-#	Range		25-325
-	-Vm		146.07 # Hovis04
-#	Extrapol	N17
-#	Ref		Wat81
-
 Ni
 	Ni + 2 H+ + 0.5 O2 = H2O + Ni+2
 	log_k		50.9914
@@ -5535,16 +5397,6 @@ Pseudowollastonite
 	-Vm		40.08 # thermo.com.V8.R6+.tdat
 #	Extrapol	Cp integration
 #	Ref		77bar/kna
-
-Pyridine
-	C5H5N + 6.25 O2 = 5 CO2 + 2.5 H2O + 0.5 N2
-	log_k		490.7474
-	-delta_H	-669.9574	kcal/mol
-	-analytic	1071.04 -2.50773 0 0 0 0.00188
-#	Range		0-350
-	-Vm		64.4
-#	Extrapol	supcrt92
-#	Ref		Hel+98
 
 Pyrite
 	FeS2 + H2O = 0.25 H+ + 0.25 SO4-2 + Fe+2 + 1.75 HS-
@@ -6206,13 +6058,6 @@ TiCl3
 	-Vm		58.42 # gfw/density
 #	Ref		WEP+82
 
-TiN
-	TiN + 3.5 H2O + 0.25 O2 = NH3 + Ti(OH)4
-	log_k		35.2344
-#	deltafH		-338.304	kJ/mol
-	-Vm		11.46 # gfw/density
-#	Ref		WEP+82
-
 Titanite
 	CaTiSiO5 + 2 H+ + H2O = Ca+2 + SiO2 + Ti(OH)4
 	log_k		719.5839
@@ -6361,17 +6206,6 @@ UH3(beta)
 #	Range		0-200
 	-Vm		22.01 # gfw/density
 #	Extrapol	Constant H approx
-#	Ref		92gre/fug
-
-UN
-	UN + 3 H+ = NH3 + U+3
-	log_k		41.7130
-	-delta_H	-280.437	kJ/mol
-#	deltafH		-290		kJ/mol
-	-analytic	-1.6393e2 -1.1679e-3 2.8845e3 6.5637e1 3.0122e6
-#	Range		0-300
-	-Vm		45.85 # gfw/density
-#	Extrapol	Cp integration
 #	Ref		92gre/fug
 
 UO2(NO3)2
@@ -6948,58 +6782,6 @@ H2S(g)
 	-Omega		0.1
 #	Extrapol	supcrt92
 #	Ref		WEP+82, Kel60
-
-N2(g)
-	N2 = N2
-	log_k		-3.1864 
-	-delta_H	-10.4391	kJ/mol
-#	deltafH		0		kcal/mol
-	-analytic	-58.453 1.818e-3 3199 17.909 -27460 # phreeqc.dat
-#	Range		0-350
-	-T_c		126.2 # K
-	-P_c		33.50
-	-Omega		0.039
-#	Extrapol	supcrt92
-#	Ref		WEP+82, Kel60
-
-NH3(g)
-	NH3 = NH3       
-	log_k		1.7966
-	-delta_H	-35.2251	kJ/mol
-#	deltafH		-11.021		kcal/mol
-	-analytic	-18.758 3.3670e-4 2.5113e3 4.8619 39.192
-#	Range		0-350
-	-T_c		405.6 # K
-	-P_c		111.3
-	-Omega		0.25
-#	Extrapol	supcrt92
-#	Ref		WEP+82, Kel60
-
-NO(g)
-	NO + 0.5 H2O + 0.25 O2 = H+ + NO2- 
-	log_k		0.7554
-	-delta_H	-48.8884	kJ/mol
-#	deltafH		90.241		kJ/mol
-	-analytic	8.2147 -1.2708e-1 -6.0593e3 2.0504e1 -9.4551e1
-#	Range		0-300
-	-T_c		180 # K
-	-P_c		64.64
-	-Omega		0.607 # http://webserver.dmt.upm.es/~isidoro/dat1/eGAS.pdf
-#	Extrapol	supcrt92, Cp integration
-#	Ref		AS01, WEP+82 differ by 0.2 log K at 0C, 17 log K at 350C !! flag
-
-NO2(g)
-	NO2 + 0.5 H2O + 0.25 O2 = H+ + NO3- 
-	log_k		8.3673
-	-delta_H	-94.0124	kJ/mol
-#	deltafH		33.154		kJ/mol
-	-analytic	9.4389e1 -2.7511e-1 -1.6783e4 2.1127e1 -2.6191e2
-#	Range		0-300
-	-T_c		431 # K
-	-P_c		99.67
-	-Omega		0 # Not found
-#	Extrapol	Cp integration
-#	Ref		WEP+82
 
 O2(g)
 	O2 = O2       
