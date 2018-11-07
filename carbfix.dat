@@ -234,6 +234,9 @@ U(+4)	U+4	0	U
 U(+5)	UO2+	0	U	
 U(+6)	UO2+2	0	U	
 Zn	Zn+2	0	Zn	65.39
+# redox-uncoupled gases
+Oxg		Oxg	0	Oxg		32 # O2 gas
+Ntg		Ntg	0	Ntg		28.0134 # N2 gas
 
 SOLUTION_SPECIES
 
@@ -463,6 +466,18 @@ Zn+2 = Zn+2
 	-delta_H	0		kJ/mol
 #	deltafH		-36.66		kcal/mol
 	-Vm		-1.96 -10.4 14.3 -2.35 1.46 5 -1.43 24 1.67e-2 1.11 # APP14
+
+Ntg = Ntg 
+	-llnl_gamma	3.0
+	log_k		0
+	-delta_H	0		kJ/mol
+	-Vm		6.2046 7.3685 2.8539 -3.0836 -0.34680
+
+Oxg = Oxg
+	-CO2_llnl_gamma
+	log_k		0
+	-delta_H	0		kJ/mol
+	-Vm		5.7889 6.3536 3.2528 -3.0417 -0.3943
 
 #-------------------
 # 40 Redox couples
@@ -6806,6 +6821,32 @@ SO2(g)
 	-T_c		430 # K
 	-P_c		77.67
 	-Omega		0.251 # http://webserver.dmt.upm.es/~isidoro/dat1/eGAS.pdf
+#	Extrapol	supcrt92
+#	Ref		WEP+82, Kel60
+
+Ntg(g)
+	Ntg = Ntg
+	log_k		-3.1864 
+	-delta_H	-10.4391	kJ/mol
+#	deltafH		0		kcal/mol
+	-analytic	-58.453 1.818e-3 3199 17.909 -27460 # phreeqc.dat
+#	Range		0-350
+	-T_c		126.2 # K
+	-P_c		33.50
+	-Omega		0.039
+#	Extrapol	supcrt92
+#	Ref		WEP+82, Kel60
+
+Oxg(g)
+	Oxg = Oxg       
+	log_k		-2.8983
+	-delta_H	-12.1336	kJ/mol
+#	deltafH		0		kcal/mol
+	-analytic	-7.5001 7.8981e-3 0.0 0.0 2.0027e5
+#	Range		0-300
+	-T_c		154.6 # K phreeqc.dat
+	-P_c		49.80 # phreeqc.dat
+	-Omega		0.021 # phreeqc.dat
 #	Extrapol	supcrt92
 #	Ref		WEP+82, Kel60
 
