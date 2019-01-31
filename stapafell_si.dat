@@ -1,0 +1,36 @@
+#Basaltic glass leached layer solubility - calculated by Martin Voigt from a stoichiometric mixture of amorphous SiO2 and Al(OH)3 of carbfix.dat
+#NOTE: The analytical expression was calculated assuming a constant Cp for Al(OH)3(am), so that significant systematic errors occur at high temperatures!
+# Stapafell_Martin
+# 	Si1.00Al0.35O2(OH)1.05 + 0.35 OH- = 0.35 Al(OH)4- + SiO2
+# 	log_k		-2.36449
+# 	-analytic	77.82514814711445 0.032450265390183614 -1502.5932036570116 -33.02705435543141 -216815.051931841 -7.454186812457974e-6
+
+#Corrected with kinetic fit
+Stapafell_Martin
+	Si1.00Al0.35O2(OH)1.05 + 0.35 OH- = 0.35 Al(OH)4- + SiO2
+	log_k		-3.66699
+	-analytic	76.5226 0.032450265390183614 -1502.5932036570116 -33.02705435543141 -216815.051931841 -7.454186812457974e-6
+
+#Using Gibbsite
+# Stapafell_Martin
+# 	Si1.00Al0.35O2(OH)1.05 + 1.05 H+ = 0.35 Al+3 + 1.05 H2O + SiO2
+# 	log_k -0.0336023
+# 	-analytical_expression -38.6996	-0.005681849999999999	5066.66	11.652	-485867.8075
+
+# Using Quartz+Gibbsite
+# Stapafell_Martin
+# 	Si1.00Al0.35O2(OH)1.05 + 1.05 H+ = 0.35 Al+3 + 1.05 H2O + SiO2
+# 	log_k -1.31877
+# 	-analytical_expression -39.832802	-0.002146549999999999	6168.36	10.7418	-721337.8075
+
+# Using Quartz+Gibbsite, then fit to kinetics
+# Stapafell_Martin
+# 	Si1.00Al0.35O2(OH)1.05 + 1.05 H+ = 0.35 Al+3 + 1.05 H2O + SiO2
+# 	log_k -0.65
+# 	# -analytical_expression -39.5462	-0.002146549999999999	6168.36	10.7418	-721337.8075
+
+# #New fit to kinetics
+# Stapafell_Martin
+# 	Si1.00Al0.35O2(OH)1.05 + 1.05 H+ = 0.35 Al+3 + 1.05 H2O + SiO2
+# 	log_k -0.355848
+# 	delta_h -24428.8 J

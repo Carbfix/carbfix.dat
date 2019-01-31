@@ -1,4 +1,4 @@
-# carbfix.dat - created May 04, 2018, last edited August 28, 2018.
+# carbfix.dat - created May 04, 2018, last edited January 31, 2019.
 # "Stapafell" version with inofficial additions.
 # The latest carbfix.dat version is available from https://github.com/CarbFix/carbfix.dat
 #
@@ -105,7 +105,9 @@
 #
 # Additional Stapafell references
 # CWM89: Cox, J.D., Wagman, D.D., and Medvedev, V.A., 1989, CODATA Key Values for Thermodynamics, Hemisphere Publishing Corp., New York.
+# DGA+97: http://dx.doi.org/10.1016/S0009-2541(97)00079-X
 # GH+97: http://doi.org/10.1016/S0016-7037(96)00409-7
+# GO03: http://doi.org/10.1016/S0016-7037(03)00176-5
 # GWB+14: http://dx.doi.org/10.1016/j.gca.2013.10.044
 # NRK71: Naumov, G.B., Ryshenko, B.N., and Khodakovsky, I.L., 1971, Handbook of thermodynamic data (translation of Russian report): United States Geological Service Report WRD-74-001, 328p.
 # SG01: http://doi.org/10.2475/ajs.301.6.513
@@ -6773,12 +6775,12 @@ Stapafell_Iwona
 	log_k		1.07
 	delta_h		-24.83 kJ
 
-#Basaltic glass leached layer solubility - calculated by Martin Voigt from a stoichiometric mixture of amorphous SiO2 and Al(OH)3 of carbfix.dat
+#Basaltic glass leached layer solubility - calculated by Martin Voigt in two steps: (1) Stoichiometric mixture of amorphous SiO2 and Al(OH)3 of carbfix.dat, then (2) adjustment by fitting to close to equilibrium basalt dissolution data (mainly DGA+97).
 #NOTE: The analytical expression was calculated assuming a constant Cp for Al(OH)3(am), so that significant systematic errors occur at high temperatures!
 Stapafell_Martin
 	Si1.00Al0.35O2(OH)1.05 + 0.35 OH- = 0.35 Al(OH)4- + SiO2
-	log_k		-2.36449
-	-analytic	77.82514814711445 0.032450265390183614 -1502.5932036570116 -33.02705435543141 -216815.051931841 -7.454186812457974e-6
+	log_k		-3.66699
+	-analytic	76.5226 0.032450265390183614 -1502.5932036570116 -33.02705435543141 -216815.051931841 -7.454186812457974e-6
 
 #Amorphous Al(OH)3 solubility
 #NOTE: The analytical expression was calculated assuming a constant Cp, so that significant systematic errors occur at high temperatures!
@@ -7033,9 +7035,9 @@ SO2(g)
 
 #Basaltic glass (Stapafell) dissolution rate
 #Use with this basaltic glass stoichiometry: Si1.000Ti0.024Al0.358Fe0.188Mg0.281Ca0.264Na0.079K0.008O3.370
-#Based on Gislason & Oelkers (2003), GCA (https://doi.org/10.1016/S0016-7037(03)00176-5)
-#Parameter 1: 2.5e-6 (mol of Si / cm2 / s)
-#Parameter 2: 25500 (J/mol)
+#Based on GO03 - Gislason & Oelkers (2003), GCA (https://doi.org/10.1016/S0016-7037(03)00176-5), but re-fitted of the kinetic data using carbfix.dat thermodynamic data.
+#Parameter 1: 1.08e-6 (mol of Si / cm2 / s) (original GO03 value: 2.5e-6)
+#Parameter 2: 21500 (J/mol) (original GO03 value: 25500)
 #Parameter 3: Initial geometric surface area in cm2
 RATES
 BG_Stapafell
