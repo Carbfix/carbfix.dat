@@ -6775,9 +6775,16 @@ Stapafell_Iwona
 	log_k		1.07
 	delta_h		-24.83 kJ
 
-#Basaltic glass leached layer solubility - calculated by Martin Voigt in two steps: (1) Stoichiometric mixture of amorphous SiO2 and Al(OH)3 of carbfix.dat, then (2) adjustment by fitting to close to equilibrium basalt dissolution data (mainly DGA+97).
+#Basaltic glass leached layer solubility - calculated by Martin Voigt from a stoichiometric mixture of amorphous SiO2 and Al(OH)3 of carbfix.dat
 #NOTE: The analytical expression was calculated assuming a constant Cp for Al(OH)3(am), so that significant systematic errors occur at high temperatures!
 Stapafell_Martin
+	Si1.00Al0.35O2(OH)1.05 + 0.35 OH- = 0.35 Al(OH)4- + SiO2
+	log_k		-2.36449
+	-analytic	77.82514814711445 0.032450265390183614 -1502.5932036570116 -33.02705435543141 -216815.051931841 -7.454186812457974e-6
+
+#Basaltic glass leached layer solubility - calculated by Martin Voigt in two steps: (1) Stoichiometric mixture of amorphous SiO2 and Al(OH)3 of carbfix.dat, then (2) adjustment by fitting to close to equilibrium basalt dissolution data (mainly DGA+97).
+#NOTE: The analytical expression was calculated assuming a constant Cp for Al(OH)3(am), so that significant systematic errors occur at high temperatures!
+Stapafell_Martin_KinFit
 	Si1.00Al0.35O2(OH)1.05 + 0.35 OH- = 0.35 Al(OH)4- + SiO2
 	log_k		-3.66699
 	-analytic	76.5226 0.032450265390183614 -1502.5932036570116 -33.02705435543141 -216815.051931841 -7.454186812457974e-6
