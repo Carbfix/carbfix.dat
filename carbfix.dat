@@ -2746,6 +2746,23 @@ H+ + F- = HF
 	-analytic	1.4359e+002 4.0866e-002 -4.6776e+003 -5.5574e+001 -7.3032e+001 # llnl.dat
 	-Vm			5.2263 4.9797 3.7928 -2.9849 1.2934 # SH88 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
 
+F- + Ca++ = CaF+
+	-llnl_gamma	4.0    
+	log_k		+0.6817
+	-analytic	7.8058e+001 3.8276e-002 -1.3289e+003 -3.4071e+001 -2.0759e+001 #llnl.dat
+	-Vm			0.1568	-7.3958	8.6499	-2.4732	0.6911 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+
+Mg++ + F- = MgF+
+	-llnl_gamma	4.0    
+	log_k		+1.3524
+	-analytic	6.4311e+001 3.5184e-002 -7.3241e+002 -2.8678e+001 -1.1448e+001 #llnl.dat
+	-Vm			-0.2975	-8.5049	9.0858	-2.4274	0.9706 # CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+
+Na+ + F- = NaF
+	-llnl_gamma	3.0    
+	log_k		-0.9976
+	-analytic	1.2507e+002 3.8619e-002 -3.5436e+003 -5.0787e+001 -5.5332e+001 #llnl.dat
+
 H+ + S2O3-- = HS2O3-
 	-llnl_gamma	4.0
 	log_k		1.68836 # SSW+97 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
