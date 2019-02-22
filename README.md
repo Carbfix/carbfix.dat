@@ -5,7 +5,7 @@ This database is built upon the [core10.dat](https://github.com/MarcNeveu/IcyDwa
 
 Current features of carbfix.dat include:
 * All the data of core10.dat - thermodynamic data for a vast number of minerals and aqueous species
-* 18 zeolite group miners
+* 18 zeolite group minerals
 * Re-calibrated solubilities of siderite and dolomite
 * New data for stabilities of aqueous metal-carbonate complexes
 * Data for stabilities of aqueous iron-hydroxide complexes
