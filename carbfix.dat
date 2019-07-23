@@ -1,4 +1,4 @@
-# carbfix.dat - created May 04, 2018, last edited June 14, 2019.
+# carbfix.dat - created May 04, 2018, last edited July 23, 2019.
 # "amm" version with inofficial changes.
 # The latest carbfix.dat version is available from https://github.com/CarbFix/carbfix.dat
 #
@@ -98,6 +98,7 @@
 # SBS13: http://dx.doi.org/10.1016/j.gca.2013.04.023
 # SBS14: http://dx.doi.org/10.1016/j.gca.2014.04.008
 # MS97: http://dx.doi.org/10.1016/S0016-7037(97)00241-X
+# PB82: http://doi.org/10.1016/0016-7037(82)90056-4
 # P+96: http://dx.doi.org/10.1016/0016-7037(96)00123-8
 # SK95: https://doi.org/10.1016/0016-7037(95)00058-8
 # TS01: http://dx.doi.org/10.1016/S0016-7037(01)00705-0
@@ -3354,17 +3355,6 @@ Chalcopyrite
 #	Extrapol	supcrt92
 #	Ref		HDN+78
 
-Chamosite
-	Fe5Al2Si3O10(OH)8 + 16 H+ = 3 SiO2 + 2 Al+3 + 5 Fe+2 + 12 H2O
-	log_k		32.8416
-	-delta_H	-364.213	kJ/mol
-#	deltafH		-902.407	kcal/mol
-	-analytic	1.577e2 -4.614e-1 0 0 0 3.413e-4
-#	Range		0-300
-	-Vm		213.42
-#	Extrapol	supcrt92
-#	Ref		Wilson+06
-
 Chloromagnesite
 	MgCl2 = Mg+2 + 2 Cl-
 	log_k		21.8604
@@ -6575,6 +6565,18 @@ Siderite
 	log_k		-11.0441 # carbfix.dat
 	-analytic	349.4317054926304 0.03628114046578195 -13573.811090861998 -131.65143185871804 0 0 # carbfix.dat
 	-Vm			29.378 # core10.dat
+
+Vaterite
+	CaCO3 = Ca+2 + CO3-2
+	log_k		-7.913 # PB82
+	-analytic	-172.1295 -0.077993 3074.688 71.595 # PB82
+	-Vm			37.628 # Webmineral
+
+Chamosite
+	Fe5Al2Si3O10(OH)8 + 16 H+ = 3 SiO2 + 2 Al+3 + 5 Fe+2 + 12 H2O
+	log_k		51.0989 # Wilson+06 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-analytic	-2261.8191086219654 -0.05624157931775312 177907.89284663578 751.8600225754568 -1.0016051707895715e7 -0.00016619114943726155 # Wilson+06 + CHNOSZ/OBIGT/SUPCRTBL - D08,Z+16
+	-Vm		213.42 # Wilson+06
 
 Ferroactinolite
 	Ca2Fe5Si8O24H2 + 14 H+ = 8 H2O + 2 Ca++ + 5 Fe++ + 8 SiO2
