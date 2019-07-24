@@ -1,4 +1,4 @@
-# carbfix.dat - created May 04, 2018, last edited July 23, 2019.
+# carbfix.dat - created May 04, 2018, last edited July 24, 2019.
 # "amm" version with inofficial changes.
 # The latest carbfix.dat version is available from https://github.com/CarbFix/carbfix.dat
 #
@@ -100,7 +100,8 @@
 # MS97: http://dx.doi.org/10.1016/S0016-7037(97)00241-X
 # PB82: http://doi.org/10.1016/0016-7037(82)90056-4
 # P+96: http://dx.doi.org/10.1016/0016-7037(96)00123-8
-# SK95: https://doi.org/10.1016/0016-7037(95)00058-8
+# SK95: http://doi.org/10.1016/0016-7037(95)00058-8
+# SS97: http://doi.org/10.1016/S0016-7037(97)00291-3
 # TS01: http://dx.doi.org/10.1016/S0016-7037(01)00705-0
 # Z+16: http://dx.doi.org/10.1016/j.cageo.2016.02.013
 #
@@ -1675,17 +1676,6 @@ HPO4-2 + H+ = H2PO4-
 #	Extrapol	supcrt92
 #	Ref		SH88
 
-HS- + H+ = H2S
-	-llnl_gamma	3.0    
-	log_k		6.9877
-	-delta_H	-21.5518	kJ/mol
-#	deltafH		-9.001		kcal/mol
-	-analytic	3.9283e1 2.8727e-2  1.3477e3 -1.8331e1  2.1018e1
-#	Range		0-350
-	-Vm		7.81 2.96 -0.46 # phreeqc.dat
-#	Extrapol	supcrt92	
-#	Ref		SSW01, SHS89
-
 3 H+ + 2 HPO4-2 = H3P2O7- + H2O
 	-llnl_gamma	4.0    
 	log_k		14.4165
@@ -2489,6 +2479,12 @@ Zn+2 + SO4-2 = ZnSO4
 #---------------------------
 # carbfix.dat additions and changes
 #---------------------------
+
+HS- + H+ = H2S
+	-llnl_gamma	3.0
+	log_k		6.97791 # SS97
+	-analytic	-782.43945 -0.361261 20565.7315 328.67496 0 1.6722e-4 # SS97
+	-Vm		7.81 2.96 -0.46 # phreeqc.dat
 
 2 H2O + Al+3 = Al(OH)2+ + 2 H+
 	-llnl_gamma	4.0
