@@ -1,4 +1,4 @@
-# carbfix.dat - created May 04, 2018, last edited July 24, 2019.
+# carbfix.dat - created May 04, 2018, last edited June 14, 2021.
 # The latest carbfix.dat version is available from https://github.com/CarbFix/carbfix.dat
 #
 # The carbfix.dat thermodynamic database for PHREEQC is based on the core10.dat database, which is available at https://github.com/MarcNeveu/IcyDwarf/.
@@ -92,6 +92,7 @@
 # Additional carbfix.dat references
 # D08: http://dx.doi.org/10.1186/1467-4866-9-10
 # DEW17: Deep Earth Water (DEW) spreadsheet http://www.dewcommunity.org
+# HP98: https://doi.org/10.1111/j.1525-1314.1998.00140.x
 # HP11: http://dx.doi.org/10.1111/j.1525-1314.2010.00923.x
 # Neu00: Neuhoff P.S., 2000, Thermodynamic Properties and Parageneses of Rock-Forming Zeolites. PhD Thesis. Stanford University.
 # SBS13: http://dx.doi.org/10.1016/j.gca.2013.04.023
@@ -6841,18 +6842,13 @@ H2(g)
 #	Extrapol	supcrt92
 #	Ref		WEP+82, Kel60
 
-H2O(g)
-	H2O = H2O       
-	log_k		1.5854
-	-delta_H	-43.4383	kJ/mol
-#	deltafH		-57.935		kcal/mol
-	-analytic	-1.4782e1 1.0752e-3 2.7519e3 2.7548 4.2945e1
-#	Range		0-350
-	-T_c		647.3 # K
-	-P_c		218.31
-	-Omega		0.344 # http://webserver.dmt.upm.es/~isidoro/dat1/eGAS.pdf
-#	Extrapol	supcrt92
-#	Ref		Joh90
+H2O(g) # HP98
+	H2O = 1.000 H2O
+	-log_k 1.5108
+	-analytic -1.4782e1 1.0752e-3 2.7519e3 2.7548 4.2945e1
+	-T_c  647.3
+	-P_c  220.9
+	-Omega  0.344
 
 H2S(g)
 	H2S = H+ + HS-     
