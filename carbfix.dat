@@ -1,11 +1,12 @@
 # carbfix.dat - created May 04, 2018, last edited June 14, 2021.
-# The latest carbfix.dat version is available from https://github.com/CarbFix/carbfix.dat
+# carbfix-kin.dat - last edited March 15, 2022.
+# The latest carbfix.dat and carbfix-kin.dat version is available from https://github.com/CarbFix/carbfix.dat
 #
 # The carbfix.dat thermodynamic database for PHREEQC is based on the core10.dat database, which is available at https://github.com/MarcNeveu/IcyDwarf/.
 # This version is based on https://github.com/MarcNeveu/IcyDwarf/blob/68728be1eda9cf78a576c8a09a243c8550b09579/IcyDwarf/PHREEQC-3.1.2/core10.dat, downloaded from GitHub on May 04, 2018.
 #
 # Reference for carbfix.dat database description: Voigt M., Marieni C., Clark D. E., Gíslason S. R., and Oelkers E. H. (2018) Evaluation and refinement of thermodynamic databases for mineral carbonation. Energy Procedia 146, 81-91. http://dx.doi.org/10.1016/j.egypro.2018.07.012
-
+# Reference for carbfix_kin.dat database description: Hermanska M., Voigt M. J., Marieni C., Declercq J., and Oelkers E. H. (2022) A comprehensive and internally consistent mineral dissolution rate database: Part I: Primary silicate minerals and glasses. Chemical Geology. https://doi.org/10.1016/j.chemgeo.2022.120807
 # Reference for core10.dat database description: Neveu M., Desch S. J., Castillo-Rogez J. C. (2017) Aqueous geochemistry in icy world interiors: Equilibrium fluid, rock, and gas compositions, and fate of antifreezes and radionuclides. Geochimica et Cosmochimica Acta 212, 324-371. http://dx.doi.org/10.1016/j.gca.2017.06.023
 #
 # Extrapolation algorithms:
@@ -6940,3 +6941,1008 @@ SO2(g)
 	-Omega		0.251 # http://webserver.dmt.upm.es/~isidoro/dat1/eGAS.pdf
 #	Extrapol	supcrt92
 #	Ref		WEP+82, Kel60
+
+#----------
+# Additional phases added for the purpose of the kinetics
+#----------
+
+#Basaltic glass leached layer solubility - calculated from a stoichiometric mixture of amorphous SiO2 and Al(OH)3 in this database.
+#NOTE: The analytical expression was calculated assuming a constant Cp for Al(OH)3(am), so that significant systematic errors occur at high temperatures!
+Glass_Basalt_leached_layer
+	Si1.00Al0.35O2(OH)1.05 + 0.35 OH- = 0.35 Al(OH)4- + SiO2
+	log_k		-2.36449
+	-analytic	77.82514814711445 0.032450265390183614 -1502.5932036570116 -33.02705435543141 -216815.051931841 -7.454186812457974e-6
+
+#Rhyolite glass leached layer solubility - calculated from a stoichiometric mixture of amorphous SiO2 and Al(OH)3 in this database.
+#NOTE: The analytical expression was calculated assuming a constant Cp for Al(OH)3(am), so that significant systematic errors occur at high temperatures!
+Glass_Rhyolite_leached_layer
+Si1.00Al0.23O2(OH)0.69 + 0.23 OH- = 0.23 Al(OH)4- + SiO2
+	log_k -2.49416
+	-analytic 5.1557406e+01 2.3750757e-02 -1.7710982e+02 -2.2884601e+01 -3.0907618e+05 -4.8984656e-06
+
+
+#----------
+# List of the RATE blocks (details in Hermanska et al. 2021)
+#----------
+
+
+RATES
+
+Albite #NaAlSi3O8; M 262.219 g/mol
+-start
+1 name$ = "Albite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 0.7	#mol.m-2.s-1
+1001 Ab = 2.05e-1 #mol.m-2.s-1 
+1002 Ac = 1.5e-5 #mol.m-2.s-1
+1003 Ea = 58000  #J.mol-1
+1004 Eb = 60000	#J.mol-1
+1005 Ec = 50000	#J.mol-1
+1006 R =  8.314 #J.deg-1.mol-1
+1008 na = 0.3
+1010 nc = -0.3
+1011 Sig = 3
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk))) * S
+2002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* (act("H+")^nc) * S 
+2009 rplus = rplusa + rplusb + rplusc
+3000 rate = rplus * (1 - (SR ("Albite")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Albite_high #NaAlSi3O8; M 262.219 g/mol
+-start
+1 name$ = "Albite_high"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 0.7	#mol.m-2.s-1
+1001 Ab = 2.05e-1 #mol.m-2.s-1 
+1002 Ac = 1.5e-5 #mol.m-2.s-1
+1003 Ea = 58000  #J.mol-1
+1004 Eb = 60000	#J.mol-1
+1005 Ec = 50000	#J.mol-1
+1006 R =  8.314 #J.deg-1.mol-1
+1008 na = 0.3
+1010 nc = -0.3
+1011 Sig = 3
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk))) * S
+2002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* (act("H+")^nc) * S 
+2009 rplus = rplusa + rplusb + rplusc
+3000 rate = rplus * (1 - (SR ("Albite_high")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Albite_low #NaAlSi3O8; M 262.219 g/mol
+-start
+1 name$ = "Albite_low"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 0.7	#mol.m-2.s-1
+1001 Ab = 2.05e-1 #mol.m-2.s-1 
+1002 Ac = 1.5e-5 #mol.m-2.s-1
+1003 Ea = 58000  #J.mol-1
+1004 Eb = 60000	#J.mol-1
+1005 Ec = 50000	#J.mol-1
+1006 R =  8.314 #J.deg-1.mol-1
+1008 na = 0.3
+1010 nc = -0.3
+1011 Sig = 3
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk))) * S
+2002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* (act("H+")^nc) * S 
+2009 rplus = rplusa + rplusb + rplusc
+3000 rate = rplus * (1 - (SR ("Albite_low")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Andesine_ss#Ca0.4Na0.6Al1.4Si2.6O8 , M 268.613 g/mol
+-start
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * 268.613 else S = ((m/m0)^(2/3)) * 268.613 * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 146.75#mol.m-2.s-1
+1001 Ab = 0.19	#mol.m-2.s-1 
+1002 Ac = 1.5e-5 #mol.m-2.s-1
+1003 Ea = 58000  #J.mol-1
+1004 Eb = 60000	#J.mol-1
+1005 Ec = 50000	#J.mol-1
+1006 R =  8.314 #J.deg-1.mol-1
+1008 na = 0.67
+1010 nc = -0.35
+1011 Sig = 2.6
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk))) * S
+2002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* (act("H+")^nc) * S 
+2009 rplus = rplusa + rplusb + rplusc
+2010 SR_Andesine=(SR ("Albite")*0.6)*(SR ("Anorthite")*0.4)
+3000 rate = rplus * (1 - (SR_Andesine^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Annite	#KFe3AlSi3O10(OH)2; M 511.85 g/mol
+-start
+1 name$ = "Annite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		# parameters
+1000 Aa = 5.90e-7 #mol.m-2.s-1
+1001 Ab = 5e-9 #mol.m-2.s-1
+1002 Ac = 4e-10 #mol.m-2.s-1
+1003 Ea = 18200    #J.mol-1
+1004 Eb = 22000    #J.mol-1
+1005 Ec = 25500    #J.mol-1
+1006 R =  8.314    #J.deg-1.mol-1
+1007 ACTI = ACT ("H+")
+1008 na = 0.5
+1009 nc = -0.16
+1010 Sig = 3
+		#rate equation
+2000 rplusa = Aa * ACTI^na  * exp(-Ea/ (R * Tk)) * S
+2001 rplusb = Ab * exp(-Eb/ (R * Tk)) * S
+2002 rplusc = Ac * ACTI^nc  * exp(-Ec/ (R * Tk)) * S
+2003 rplus = rplusa + rplusb + rplusc
+3000 rate = rplus * (1 - (SR ("Annite")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Anorthite	#CaAl2Si2O8; M 278.204 g/mol
+-start
+1 name$ = "Anorthite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3))* GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 9.82e4	#mol.m-2.s-1
+1001 Ab = 1.5E-1	#mol.m-2.s-1 
+1002 Ac = 1.5E-5 #mol.m-2.s-1
+1003 Ea = 58000  #J.mol-1
+1004 Eb = 60000	#J.mol-1
+1005 Ec = 50000	#J.mol-1
+1006 R =  8.314 #J.deg-1.mol-1
+1008 na = 1.22
+1010 nc = -0.35
+1011 Sig = 2
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk))) * S
+2002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* (act("H+")^nc) * S 
+2009 rplus = rplusa + rplusb + rplusc
+3000 rate = rplus * (1 - (SR_Anorthite^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Anthophyllite #Mg7Si8O22(OH)2, M 780.807 g/mol
+-start
+1 name$ = "Anthophyllite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		# parameters
+1000 Aa = 5.7e-4 #mol.m-2.s-1
+1001 Ab = 5.0e-6 #mol.m-2.s-1
+1002 Ea = 52000 #J.mol-1
+1003 Eb = 48000 #J.mol-1
+1004 R =  8.314 #J.deg-1.mol-1
+1005 n = 0.42
+1006 Sig = 8
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^n )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk)))* S
+2010 rplus = rplusa + rplusb
+3000 rate = rplus * (1 - (SR ("Anthophyllite")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Augite_ss#Mg0.45Fe0.275Ca0.275SiO3;M 113.4  g/mol   
+-start
+   2 if (PARM(1) = 0) then  goto 3 else goto 5
+   3 if PARM(3) = 0 then S = PARM(2) * m * 113.4 else S = ((m/m0)^(2/3)) * 113.4 * PARM(2)
+   4 GOTO 1000
+   5 S = PARM(2)*TOT("water")
+1000 Aa  =1.52e6
+1001 Ab  =350
+1002 Ea  =81834
+1003 Eb  =83000
+1004 R =  8.314
+1006 Sig = 1
+1007 na =0.7
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk))) * S
+2009 rplus = rplusa + rplusb
+2010 SR_Augite=(SR ("Wollastonite")*0.45)*(SR ("Ferrosilite")*0.275)*(SR ("Enstatite")*0.275)
+3000 rate = rplus * (1 - (SR_Augite^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Biotite_ss	#KFe1.5Mg1.5AlSi3O10(OH)2; M 464.564 g/mol
+-start
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * 464.564 else S = ((m/m0)^(2/3)) * 464.564 * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		# parameters
+1000 Aa = 5.90e-7 #mol.m-2.s-1
+1001 Ab = 5e-9 #mol.m-2.s-1
+1002 Ac = 4e-10 #mol.m-2.s-1
+1003 Ea = 18200    #J.mol-1
+1004 Eb = 22000    #J.mol-1
+1005 Ec = 25500    #J.mol-1
+1006 R =  8.314    #J.deg-1.mol-1
+1007 ACTI = ACT ("H+")
+1008 na = 0.5
+1009 nc = -0.16
+1010 Sig = 3
+		#rate equation
+2000 rplusa = Aa * ACTI^na  * exp(-Ea/ (R * Tk)) * S
+2001 rplusb = Ab * exp(-Eb/ (R * Tk)) * S
+2002 rplusc = Ac * ACTI^nc  * exp(-Ec/ (R * Tk)) * S
+2003 rplus = rplusa + rplusb + rplusc
+2005 SR_Biotite=(SR ("Annite")*0.5)*(SR ("Phlogopite")*0.5)
+3000 rate = rplus * (1 - (SR_Biotite^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Bronzite_ss#Mg0.77Fe0.23SiO3, M 107.6 g/mol
+-start
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * 107.6 else S = ((m/m0)^(2/3)) * 107.6 * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa  =9.5e-4# mol.m-2.s-1
+1001 Ab  =7.6e-1# mol.m-2.s-1
+1002 Ea  =38548# J/mol   
+1003 Eb  =66100# J/mol
+1006 R =  8.314 #J.deg-1.mol-1
+1008 na = 0.55
+1011 Sig = 1
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk))) * S
+2009 rplus = rplusa + rplusb
+2010 SR_Bronzite=(SR ("Enstatite")*0.77)*(SR ("Ferrosilite")*0.23)
+3000 rate = rplus * (1 - (SR_Bronzite^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Bytownite_ss#Ca0.77Na0.23Al1.77Si2.23O8, M 243.67 g/mol
+-start
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * 243.67 else S = ((m/m0)^(2/3)) * 243.67 * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 18838.52 #mol.m-2.s-1
+1001 Ab = 0.17	#mol.m-2.s-1 
+1002 Ac = 1.5e-5 #mol.m-2.s-1
+1003 Ea = 58000  #J.mol-1
+1004 Eb = 60000	#J.mol-1
+1005 Ec = 50000	#J.mol-1
+1006 R =  8.314 #J.deg-1.mol-1
+1008 na = 1.105
+1010 nc = -0.35
+1011 Sig = 2.23
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk))) * S
+2002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* (act("H+")^nc) * S 
+2009 rplus = rplusa + rplusb + rplusc
+2010 SR_Bytownite=(SR ("Albite")*0.23)*(SR ("Anorthite")*0.77)
+3000 rate = rplus * (1 - (SR_Bytownite^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Chalcedony#M 60.08 g/mol
+-start
+1 name$ = "Chalcedony"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		#Parameters
+1000 Aa = 4.563e-4#mol/m2/s
+1001 Ac = 0.0353#mol/m2/s 
+1002 na = 0.309
+1003 nc = -0.41 
+1004 Ea = 41610 
+1005 Ec = 73000  
+1006 R =  8.314 #J.deg-1.mol-1
+1007 ACTI = act("H+")
+1009 Sig = 1
+		#rate equations
+2002 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(ACTI^na)* S
+2003 rplusc = Ac* (exp(-Ec/ (R * Tk)))*(ACTI^nc)* S
+2009 rplus = rplusa + rplusc
+3000 rate = rplus * (1 - (SR ("Chalcedony")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Cristobalite(alpha)#SiO2; M 60.08 g/mol
+-start
+1 name$ = "Cristobalite(alpha)"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		#Parameters
+1000 Aa = 4.03e-4#mol/m2/s
+1001 Ac = 0.105#mol/m2/s 
+1002 na = 0.309
+1003 nc = -0.41 
+1004 Ea = 45600 
+1005 Ec = 80000
+1006 R =  8.314 #J.deg-1.mol-1
+1007 ACTI = act("H+")
+1009 Sig = 1
+		#rate equations
+2002 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(ACTI^na)* S
+2003 rplusc = Ac* (exp(-Ec/ (R * Tk)))*(ACTI^nc)* S
+2009 rplus = rplusa + rplusc
+3000 rate = rplus * (1 - (SR ("Cristobalite(alpha)")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Cristobalite(beta)#SiO2, M 60.08 g/mol
+-start
+1 name$ = "Cristobalite(beta)"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		#Parameters
+1000 Aa = 4.03e-4#mol/m2/s
+1001 Ac = 0.105#mol/m2/s 
+1002 na = 0.309
+1003 nc = -0.41 
+1004 Ea = 45600 
+1005 Ec = 80000  
+1006 R =  8.314 #J.deg-1.mol-1
+1007 ACTI = act("H+")
+1009 Sig = 1
+		#rate equations
+2002 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(ACTI^na)* S
+2003 rplusc = Ac* (exp(-Ec/ (R * Tk)))*(ACTI^nc)* S
+2009 rplus = rplusa + rplusc
+3000 rate = rplus * (1 - (SR ("Cristobalite(beta)")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Diopside #CaMgSi2O6; M 216.55 g/mol
+-start
+1 name$ = "Diopside"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		# parameters
+1000 Aa = 8.55e-5 #mol.m-2.s-1
+1001 Ab = 4.30e-4 #mol.m-2.s-1
+1003 Ea = 32654 #J.mol-1
+1004 Eb = 43866 #J.mol-1
+1006 R =  8.314 #J.deg-1.mol-1
+1007 ACTI = act("H+")
+1008 na = 0.25
+1009 Sig = 2
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(ACTI^na )* S
+2002 rplusb = Ab* (exp(-Eb/ (R * Tk)))* S
+2009 rplus = rplusa + rplusb
+3000 rate = rplus * (1 - (SR ("Diopside")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Enstatite#MgSiO3;M 100.387 g/mol
+-start
+1 name$ = "Enstatite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		# parameters
+1000 Aa = 0.574 #mol.m-2.s-1
+1001 Ab = 6252 #mol.m-2.s-1
+1003 Ea = 46080 #J.mol-1
+1004 Eb = 89538 #J.mol-1 
+1006 R =  8.314 #J.deg-1.mol-1
+1007 ACTI = act("H+")
+1008 na = 0.5
+1010 Sig = 1
+		#rate equations 
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(ACTI^na )* S
+2002 rplusb = Ab* (exp(-Eb/ (R * Tk)))* S
+2009 rplus = rplusa + rplusb
+3000 rate = rplus * (1 - (SR ("Enstatite")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Fayalite   #Fe2SiO4;M 203.771 g/mol
+-start
+1 name$ = "Fayalite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		#Parameters
+1000 Aa  =1.20e6# mol.m-2.s-1
+1001 Ac  =1.91e3# mol.m-2.s-1
+1002 Ea  =70400# J/mol
+1003 Ec  =60900# J/mol
+1004 R =  8.314 #J.deg-1.mol-1
+1006 Sig = 1  
+1007 na =0.44
+1008 nc =0.22	
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na)* S
+2001 rplusc = Ac* (exp(-Ec/ (R * Tk)))*(act("H+")^nc)* S
+2002 rplus = rplusa + rplusc
+4000 rate = rplus * (1 - SR ("Fayalite")^(1/Sig))
+5000 moles = rate * time
+6000 save moles
+-end
+
+Ferroactinolite #Ca2Fe5Si8O22(OH)2, M 970.053 g/mol, kinetic parameters from Tremolite
+-start
+1 name$ = "Ferroactinolite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		# parameters
+1000 Aa = 3.0e-3   #mol.m-2.s-1
+1001 Ab = 2.0e-5 #mol.m-2.s-1
+1002 Ea = 50000  #J.mol-1
+1003 Eb = 48000  #J.mol-1
+1004 R =  8.314 #J.deg-1.mol-1
+1005 n = 0.22
+1006 Sig = 8
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^n )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk)))* S
+2010 rplus = rplusa + rplusb
+3000 rate = rplus * (1 - (SR ("Ferroactinolite")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+
+Forsterite   #Mg2SiO4, M 140.692 g/mol   
+-start
+1 name$ = "Forsterite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		#Parameters
+1000 Aa  =14.8e4# mol.m-2.s-1
+1001 Ac  =220# mol.m-2.s-1
+1002 Ea  =70400# J/mol
+1003 Ec  =60900# J/mol
+1004 R =  8.314 #J.deg-1.mol-1
+1006 Sig = 1   
+1007 na = 0.44
+1008 nc = 0.22
+		#Rate Equation
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na)* S
+2002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* (act("H+")^nc) * S
+2009 rplus = rplusa + rplusc
+4000 rate = rplus * (1 - SR ("Forsterite")^(1/Sig))
+5000 moles = rate * time
+6000 save moles
+-end
+
+Glass_Basalt#SiTi0.02Al0.36Fe0.19Mg0.28Ca0.26Na0.08K0.008O3.364 , M 122.566 g/mol
+-start
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * 122.566 else S = ((m/m0)^(2/3)) * 122.566 * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		# parameters
+1000 if (m0<=0) then go to 5000
+1001 Aa = 1.08e-4	#mol.m-2.s-1
+1003 Ea = 21500	#J.mol-1
+1006 R = 8.3144 #J.deg-1.mol-1
+1007 ACTI = (ACT ("H+")^3)/(ACT("Al+3"))
+1008 n = 1/3
+1009 Sig = 1
+		#rate equation
+2000 rplus = Aa * ACTI^n  * exp(-Ea/ (R * Tk)) * S
+3000 rate = rplus * (1 - (SR ("Glass_Basalt_leached_layer")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Glass_Rhyolite#SiAl0.23Na0.13Fe0.05K0.05Ca0.03Mg0.007Ti0.004O2.536; M 84.165 g/mol
+-start
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * 84.165 else S = ((m/m0)^(2/3)) * 84.165 * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 1.6e-3	#mol.m-2.s-1
+1002 Ac = 7.0e-8 #mol.m-2.s-1
+1003 Ea = 36000  #J.mol-1
+1005 Ec = 52000	#J.mol-1
+1006 R =  8.314 #J.deg-1.mol-1
+1008 na = 0.48
+1010 nc = -0.6
+1011 Sig = 1
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* (act("H+")^nc) * S 
+2009 rplus = rplusa +  rplusc
+3000 rate = rplus * (1 - (SR ("Glass_Rhyolite_leached_layer")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Glaucophane_ss#Na2Mg3Al2Si8O22(OH)2, M 783.531 g/mol
+-start
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * 783.531 else S = ((m/m0)^(2/3)) * 783.531 * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 220 #mol.m-2.s-1
+1001 Ac = 1.0e-4 #mol.m-2.s-1
+1002 Ea = 50000 #J.mol-1
+1003 Ec = 48000 #J.mol-1
+1004 R =  8.314 #J.deg-1.mol-1
+1005 na = 0.7
+1006 nc = -0.12
+1007 Sig = 8
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusc = Ac* (exp(-Ec/ (R * Tk)))*(act("H+")^nc )* S
+2009 rplus = rplusa + rplusc
+2010 SR_Glaucophane =((SR ("Anthophyllite")*1)*(SR ("Jadeite")*2))*(SR ("Enstatite")*(-4))
+3000 rate = rplus * (1 - (SR_Glaucophane^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Hornblende_ss#Ca2(Mg4Al)(Si7Al)O22(OH)2, M 813.927 g/mol
+-start
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * 813.927 else S = ((m/m0)^(2/3)) * 813.927 * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 5.0e-3 #mol.m-2.s-1
+1001 Ac = 2.1e-5 #mol.m-2.s-1
+1002 Ea = 50000 #J.mol-1
+1003 Ec = 48000 #J.mol-1
+1004 R =  8.314 #J.deg-1.mol-1
+1005 na = 0.17
+1006 nc = -0.12
+1007 Sig = 7
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusc = Ac* (exp(-Ec/ (R * Tk)))*(act("H+")^nc )* S
+2009 rplus = rplusa + rplusc
+2010 SR_Hornblende =((SR ("Tremolite")*1)*(SR ("Corundum")*1))*(SR ("Enstatite")*(-1))
+3000 rate = rplus * (1 - (SR_Hornblende^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+K-feldspar #KAlSi3O8; M 278.33 g/mol
+-start
+1 name$ = "K-feldspar"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		#Parameters
+1000 Aa  = 0.05	# mol.m-2.s-1 
+1001 Ab  = 1.08e-2	# mol.m-2.s-1
+1002 Ac  = 1.2e-10	# mol.m-2.s-1
+1003 Ea  = 51700   # J/mol
+1004 Eb  = 60000   # J/mol
+1005 Ec  = 62195   # J/mol 
+1006 R =  8.314 #J.deg-1.mol-1
+1007 ACTI = act("H+") #
+1008 Sig = 3
+1009 nA = 0.45
+1010 nC = -0.75
+		#Rate Equation
+3000 rplusa = Aa * ACTI^nA * exp (-Ea/ (R * Tk)) * S
+3001 rplusb = Ab * exp (-Eb/ (R * Tk)) * S
+3002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* ACTI^(nC) * S
+3003 rplus = rplusa + rplusb + rplusc
+4000 rate = rplus * (1 - SR ("K-feldspar")^(1/Sig))
+5000 moles = rate * time
+6000 save moles
+-end
+
+Larnite   #Ca2SiO4;M 172.237 g/mol
+-start
+1 name$ = "Larnite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		#Parameters
+1000 Aa  =5.25e8# mol.m-2.s-1
+1001 Ac  =8.25e5# mol.m-2.s-1
+1002 Ea  =70400# J/mol
+1003 Ec  =60900# J/mol
+1004 R =  8.314 #J.deg-1.mol-1
+1006 Sig = 1  
+1007 na =0.44
+1008 nc =0.22	
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na)* S
+2001 rplusc = Ac* (exp(-Ec/ (R * Tk)))*(act("H+")^nc)* S
+2002 rplus = rplusa + rplusc
+4000 rate = rplus * (1 - SR ("Larnite")^(1/Sig))
+5000 moles = rate * time
+6000 save moles
+-end
+
+Labradorite_ss#Ca0.68Na0.32Al1.68Si2.32O8, M 245.84 g/mol
+-start
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * 245.84 else S = ((m/m0)^(2/3)) * 245.84 * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 5886.557 #mol.m-2.s-1
+1001 Ab = 0.17	#mol.m-2.s-1 
+1002 Ac = 1.5e-5 #mol.m-2.s-1
+1003 Ea = 58000  #J.mol-1
+1004 Eb = 60000	#J.mol-1
+1005 Ec = 50000	#J.mol-1
+1006 R =  8.314 #J.deg-1.mol-1
+1008 na = 1.0
+1010 nc = -0.35
+1011 Sig = 2.32
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk))) * S
+2002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* (act("H+")^nc) * S 
+2009 rplus = rplusa + rplusb + rplusc
+2010 SR_Labradorite=(SR ("Albite")*0.32)*(SR ("Anorthite")*0.68)
+3000 rate = rplus * (1 - (SR_Labradorite^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Maximum_Microcline #KAlSi3O8; M 278.33 g/mol
+-start
+1 name$ = "Maximum_Microcline"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		#Parameters
+1000 Aa  = 0.05	# mol.m-2.s-1 
+1001 Ab  = 1.08e-2	# mol.m-2.s-1
+1002 Ac  = 1.2e-10	# mol.m-2.s-1
+1003 Ea  = 51700   # J/mol
+1004 Eb  = 60000   # J/mol
+1005 Ec  = 62195   # J/mol 
+1006 R =  8.314 #J.deg-1.mol-1
+1007 ACTI = act("H+") #
+1008 Sig = 3
+1009 nA = 0.45
+1010 nC = -0.75
+		#Rate Equation
+3000 rplusa = Aa * ACTI^nA * exp (-Ea/ (R * Tk)) * S
+3001 rplusb = Ab * exp (-Eb/ (R * Tk)) * S
+3002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* ACTI^(nC) * S
+3003 rplus = rplusa + rplusb + rplusc
+4000 rate = rplus * (1 - SR ("Maximum_Microcline")^(1/Sig))
+5000 moles = rate * time
+6000 save moles
+-end
+
+Muscovite #KAl3Si3O10(OH)2, M 398.303 g/mol
+-start
+1 name$ = "Muscovite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		# parameters
+1000 Aa = 0.000126#mol.m-2.s-1  
+1001 Ab = 0.00000631#mol.m-2.s-1
+1002 Ac = 0.0000316#mol.m-2.s-1 
+1004 Ea = 41311    #J.mol-1  
+1005 Eb = 39301    #J.mol-1 
+1006 Ec = 56950    #J.mol-1 
+1008 R =  8.314 #J.deg-1.mol-1
+1009 nA = 0.37
+1010 nC = -0.22
+2000 Sig = 3
+		#rate equations
+2005 rplusa = Aa* (exp(-Ea/ (R * Tk)))*((act("H+"))^nA )* S
+2006 rplusb = Ab* (exp(-Eb/ (R * Tk)))* S
+2007 rplusc = Ac* (exp(-Ec/ (R * Tk)))*((act("H+"))^nC)* S
+2009 rplus = rplusa + rplusb + rplusc
+3000 rate = rplus * (1 - (SR ("Muscovite")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Oligoclase_ss#Ca0.186Na0.814Al1.186Si2.814O8, M 265.2 g/mol
+-start
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * 265.2 else S = ((m/m0)^(2/3)) * 265.2 * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 6.8	#mol.m-2.s-1
+1001 Ab = 0.2	#mol.m-2.s-1 
+1002 Ac = 1.5e-5 #mol.m-2.s-1
+1003 Ea = 58000  #J.mol-1
+1004 Eb = 60000	#J.mol-1
+1005 Ec = 50000	#J.mol-1
+1006 R =  8.314 #J.deg-1.mol-1
+1008 na = 0.38
+1010 nc = -0.35
+1011 Sig = 2.814
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk))) * S
+2002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* (act("H+")^nc) * S 
+2009 rplus = rplusa + rplusb + rplusc
+2010 SR_Oligoclase=(SR ("Albite")*0.814)*(SR ("Anorthite")*0.186)
+3000 rate = rplus * (1 - (SR_Oligoclase^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+
+Pargasite #NaCa2Al3Mg4Si6O22(OH)2, M 835.814 g/mol, kinetic parameters from glaucophane
+-start
+1 name$ = "Pargasite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		# parameters
+1000 Aa = 3.327e8 #mol.m-2.s-1
+1001 Ac = 5000 #mol.m-2.s-1
+1002 Ea = 85000 #J.mol-1
+1003 Ec = 94400 #J.mol-1
+1004 R =  8.314 #J.deg-1.mol-1
+1005 na = 0.7
+1006 nc = -0.12
+1007 Sig = 6
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^na )* S
+2001 rplusc = Ac* (exp(-Ec/ (R * Tk)))*(act("H+")^nc )* S
+2010 rplus = rplusa + rplusc
+3000 rate = rplus * (1 - (SR ("Pargasite")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Phlogopite	#KAlMg3Si3O10(OH)2; M 417.25
+-start
+1 name$ = "Phlogopite"
+2 if PARM(1) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+##------------------Kinetic calculation---------------------##
+		# parameters
+1000 Aa = 5.90e-7 #mol.m-2.s-1
+1001 Ab = 5e-9 #mol.m-2.s-1
+1002 Ac = 4e-10 #mol.m-2.s-1
+1003 Ea = 18200    #J.mol-1
+1004 Eb = 22000    #J.mol-1
+1005 Ec = 25500    #J.mol-1
+1006 R =  8.314    #J.deg-1.mol-1
+1007 ACTI = ACT ("H+")
+1008 na = 0.5
+1009 nc = -0.16
+1010 Sig = 3
+		#rate equation
+2000 rplusa = Aa * ACTI^na  * exp(-Ea/ (R * Tk)) * S
+2001 rplusb = Ab * exp(-Eb/ (R * Tk)) * S
+2002 rplusc = Ac * ACTI^nc  * exp(-Ec/ (R * Tk)) * S
+2003 rplus = rplusa + rplusb + rplusc
+3000 rate = rplus * (1 - (SR ("Phlogopite")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Quartz#SiO2; M 60.08 g/mol
+-start
+1 name$ = "Quartz"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		#Parameters
+1000 Aa = 4.03e-4#mol/m2/s
+1001 Ac = 0.105#mol/m2/s 
+1002 na = 0.309
+1003 nc = -0.41 
+1004 Ea = 45600 
+1005 Ec = 80000  
+1006 R =  8.314 #J.deg-1.mol-1
+1007 ACTI = act("H+")
+1009 Sig = 1
+		#rate equations
+2002 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(ACTI^na)* S
+2003 rplusc = Ac* (exp(-Ec/ (R * Tk)))*(ACTI^nc)* S
+2009 rplus = rplusa + rplusc
+3000 rate = rplus * (1 - (SR ("Quartz")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Riebeckite_ss#Na2Fe5Si8O22(OH)2, M 935.877 g/mol, kinetic parameters from tremolite
+-start
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * 935.877 else S = ((m/m0)^(2/3)) * 935.877 * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+        #Parameters
+1000 Aa = 3.0e-3   #mol.m-2.s-1
+1001 Ab = 2.0e-5 #mol.m-2.s-1
+1002 Ea = 50000  #J.mol-1
+1003 Eb = 48000  #J.mol-1
+1004 R =  8.314 #J.deg-1.mol-1
+1005 n = 0.22
+1006 Sig = 8
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^n )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk)))* S
+2010 rplus = rplusa + rplusb
+2011 SR_Riebeckite =((SR ("Wollastonite")*1)*(SR ("Jadeite")*2))*(SR ("Sillimanite")*(-2))
+3000 rate = rplus * (1 - (SR_Riebeckite^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Sanidine_high #KAlSi3O8; M 278.33 g/mol
+-start
+1 name$ = "Sanidine_high"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		#Parameters
+1000 Aa  = 0.05	# mol.m-2.s-1 
+1001 Ab  = 1.08e-2	# mol.m-2.s-1
+1002 Ac  = 1.2e-10	# mol.m-2.s-1
+1003 Ea  = 51700   # J/mol
+1004 Eb  = 60000   # J/mol
+1005 Ec  = 62195   # J/mol 
+1006 R =  8.314 #J.deg-1.mol-1
+1007 ACTI = act("H+") #
+1008 Sig = 3
+1009 nA = 0.45
+1010 nC = -0.75
+		#Rate Equation
+3000 rplusa = Aa * ACTI^nA * exp (-Ea/ (R * Tk)) * S
+3001 rplusb = Ab * exp (-Eb/ (R * Tk)) * S
+3002 rplusc = Ac* (exp(-Ec/ (R * Tk)))* ACTI^(nC) * S
+3003 rplus = rplusa + rplusb + rplusc
+4000 rate = rplus * (1 - SR ("Sanidine_high")^(1/Sig))
+5000 moles = rate * time
+6000 save moles
+-end
+
+
+SiO2(am)#M 60.08 g/mol
+-start
+1 name$ = "SiO2(am)"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		#Parameters
+1000 Aa = 4.563e-4#mol/m2/s
+1001 Ac = 0.0353#mol/m2/s 
+1002 na = 0.309
+1003 nc = -0.41 
+1004 Ea = 41610 
+1005 Ec = 73000  
+1006 R =  8.314 #J.deg-1.mol-1
+1007 ACTI = act("H+")
+1009 Sig = 1
+		#rate equations
+2002 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(ACTI^na)* S
+2003 rplusc = Ac* (exp(-Ec/ (R * Tk)))*(ACTI^nc)* S
+2009 rplus = rplusa + rplusc
+3000 rate = rplus * (1 - (SR ("SiO2(am)")/Sig))
+4000 moles = rate * time
+5000 save moles
+-end
+
+Tremolite #Ca2Mg5Si8O22(OH)2, 812.353 g/mol
+-start
+1 name$ = "Tremolite"
+2 if (PARM(1) = 0) then  goto 3 else goto 5
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+4 GOTO 1000
+5 S = PARM(2)*TOT("water")
+##------------------Kinetic calculation---------------------##
+		# parameters
+1000 Aa = 3.0e-3   #mol.m-2.s-1
+1001 Ab = 2.0e-5 #mol.m-2.s-1
+1002 Ea = 50000  #J.mol-1
+1003 Eb = 48000  #J.mol-1
+1004 R =  8.314 #J.deg-1.mol-1
+1005 n = 0.22
+1006 Sig = 8
+		#rate equations
+2000 rplusa = Aa* (exp(-Ea/ (R * Tk)))*(act("H+")^n )* S
+2001 rplusb = Ab* (exp(-Eb/ (R * Tk)))* S
+2010 rplus = rplusa + rplusb
+3000 rate = rplus * (1 - (SR ("Tremolite")^(1/Sig)))
+4000 moles = rate * time
+5000 save moles
+-end
+
+
+
