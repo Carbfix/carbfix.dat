@@ -1,6 +1,8 @@
 # carbfix.dat
 The carbfix.dat thermodynamic database for the [PHREEQC](https://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc/) geochemical modelling software.
 
+For a version including kinetic data, please see [here](https://github.com/CarbFix/carbfix.dat/tree/kinetics).
+
 This database is built upon the [core10.dat](https://github.com/MarcNeveu/IcyDwarf/) database, which is in turn based on the llnl.dat database shipped with PHREEQC.
 
 Current features of carbfix.dat include:
