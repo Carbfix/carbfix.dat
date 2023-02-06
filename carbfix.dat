@@ -1,5 +1,5 @@
 # carbfix.dat - created May 04, 2018, last edited June 14, 2021.
-# carbfix-kin.dat - last edited March 15, 2022.
+# carbfix-kin.dat - last edited February 6, 2023.
 # The latest carbfix.dat and carbfix-kin.dat version is available from https://github.com/CarbFix/carbfix.dat
 #
 # The carbfix.dat thermodynamic database for PHREEQC is based on the core10.dat database, which is available at https://github.com/MarcNeveu/IcyDwarf/.
@@ -6972,7 +6972,7 @@ Albite #NaAlSi3O8; M 262.219 g/mol
 -start
 1 name$ = "Albite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7001,7 +7001,7 @@ Albite_high #NaAlSi3O8; M 262.219 g/mol
 -start
 1 name$ = "Albite_high"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7030,7 +7030,7 @@ Albite_low #NaAlSi3O8; M 262.219 g/mol
 -start
 1 name$ = "Albite_low"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7058,7 +7058,7 @@ Albite_low #NaAlSi3O8; M 262.219 g/mol
 Andesine_ss#Ca0.4Na0.6Al1.4Si2.6O8 , M 268.613 g/mol
 -start
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * 268.613 else S = ((m/m0)^(2/3)) * 268.613 * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * 268.613 else S = m0 * ((m/m0)^(2/3)) * 268.613 * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7088,7 +7088,7 @@ Annite	#KFe3AlSi3O10(OH)2; M 511.85 g/mol
 -start
 1 name$ = "Annite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7118,7 +7118,7 @@ Anorthite	#CaAl2Si2O8; M 278.204 g/mol
 -start
 1 name$ = "Anorthite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3))* GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3))* GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7147,7 +7147,7 @@ Anthophyllite #Mg7Si8O22(OH)2, M 780.807 g/mol
 -start
 1 name$ = "Anthophyllite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7171,7 +7171,7 @@ Anthophyllite #Mg7Si8O22(OH)2, M 780.807 g/mol
 Augite_ss#Mg0.45Fe0.275Ca0.275SiO3;M 113.4  g/mol   
 -start
    2 if (PARM(1) = 0) then  goto 3 else goto 5
-   3 if PARM(3) = 0 then S = PARM(2) * m * 113.4 else S = ((m/m0)^(2/3)) * 113.4 * PARM(2)
+   3 if PARM(3) = 0 then S = PARM(2) * m * 113.4 else S = m0 * ((m/m0)^(2/3)) * 113.4 * PARM(2)
    4 GOTO 1000
    5 S = PARM(2)*TOT("water")
 1000 Aa  =1.52e6
@@ -7193,7 +7193,7 @@ Augite_ss#Mg0.45Fe0.275Ca0.275SiO3;M 113.4  g/mol
 Biotite_ss	#KFe1.5Mg1.5AlSi3O10(OH)2; M 464.564 g/mol
 -start
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * 464.564 else S = ((m/m0)^(2/3)) * 464.564 * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * 464.564 else S = m0 * ((m/m0)^(2/3)) * 464.564 * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7223,7 +7223,7 @@ Biotite_ss	#KFe1.5Mg1.5AlSi3O10(OH)2; M 464.564 g/mol
 Bronzite_ss#Mg0.77Fe0.23SiO3, M 107.6 g/mol
 -start
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * 107.6 else S = ((m/m0)^(2/3)) * 107.6 * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * 107.6 else S = m0 * ((m/m0)^(2/3)) * 107.6 * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7248,7 +7248,7 @@ Bronzite_ss#Mg0.77Fe0.23SiO3, M 107.6 g/mol
 Bytownite_ss#Ca0.77Na0.23Al1.77Si2.23O8, M 243.67 g/mol
 -start
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * 243.67 else S = ((m/m0)^(2/3)) * 243.67 * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * 243.67 else S = m0 * ((m/m0)^(2/3)) * 243.67 * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7278,7 +7278,7 @@ Chalcedony#M 60.08 g/mol
 -start
 1 name$ = "Chalcedony"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7305,7 +7305,7 @@ Cristobalite(alpha)#SiO2; M 60.08 g/mol
 -start
 1 name$ = "Cristobalite(alpha)"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7332,7 +7332,7 @@ Cristobalite(beta)#SiO2, M 60.08 g/mol
 -start
 1 name$ = "Cristobalite(beta)"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7359,7 +7359,7 @@ Diopside #CaMgSi2O6; M 216.55 g/mol
 -start
 1 name$ = "Diopside"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7385,7 +7385,7 @@ Enstatite#MgSiO3;M 100.387 g/mol
 -start
 1 name$ = "Enstatite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7411,7 +7411,7 @@ Fayalite   #Fe2SiO4;M 203.771 g/mol
 -start
 1 name$ = "Fayalite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7436,7 +7436,7 @@ Ferroactinolite #Ca2Fe5Si8O22(OH)2, M 970.053 g/mol, kinetic parameters from Tre
 -start
 1 name$ = "Ferroactinolite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7462,7 +7462,7 @@ Forsterite   #Mg2SiO4, M 140.692 g/mol
 -start
 1 name$ = "Forsterite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7487,7 +7487,7 @@ Forsterite   #Mg2SiO4, M 140.692 g/mol
 Glass_Basalt#SiTi0.02Al0.36Fe0.19Mg0.28Ca0.26Na0.08K0.008O3.364 , M 122.566 g/mol
 -start
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * 122.566 else S = ((m/m0)^(2/3)) * 122.566 * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * 122.566 else S = m0 * ((m/m0)^(2/3)) * 122.566 * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7509,7 +7509,7 @@ Glass_Basalt#SiTi0.02Al0.36Fe0.19Mg0.28Ca0.26Na0.08K0.008O3.364 , M 122.566 g/mo
 Glass_Rhyolite#SiAl0.23Na0.13Fe0.05K0.05Ca0.03Mg0.007Ti0.004O2.536; M 84.165 g/mol
 -start
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * 84.165 else S = ((m/m0)^(2/3)) * 84.165 * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * 84.165 else S = m0 * ((m/m0)^(2/3)) * 84.165 * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7534,7 +7534,7 @@ Glass_Rhyolite#SiAl0.23Na0.13Fe0.05K0.05Ca0.03Mg0.007Ti0.004O2.536; M 84.165 g/m
 Glaucophane_ss#Na2Mg3Al2Si8O22(OH)2, M 783.531 g/mol
 -start
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * 783.531 else S = ((m/m0)^(2/3)) * 783.531 * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * 783.531 else S = m0 * ((m/m0)^(2/3)) * 783.531 * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7560,7 +7560,7 @@ Glaucophane_ss#Na2Mg3Al2Si8O22(OH)2, M 783.531 g/mol
 Hornblende_ss#Ca2(Mg4Al)(Si7Al)O22(OH)2, M 813.927 g/mol
 -start
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * 813.927 else S = ((m/m0)^(2/3)) * 813.927 * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * 813.927 else S = m0 * ((m/m0)^(2/3)) * 813.927 * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7587,7 +7587,7 @@ K-feldspar #KAlSi3O8; M 278.33 g/mol
 -start
 1 name$ = "K-feldspar"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7617,7 +7617,7 @@ Larnite   #Ca2SiO4;M 172.237 g/mol
 -start
 1 name$ = "Larnite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7641,7 +7641,7 @@ Larnite   #Ca2SiO4;M 172.237 g/mol
 Labradorite_ss#Ca0.68Na0.32Al1.68Si2.32O8, M 245.84 g/mol
 -start
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * 245.84 else S = ((m/m0)^(2/3)) * 245.84 * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * 245.84 else S = m0 * ((m/m0)^(2/3)) * 245.84 * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7671,7 +7671,7 @@ Maximum_Microcline #KAlSi3O8; M 278.33 g/mol
 -start
 1 name$ = "Maximum_Microcline"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7701,7 +7701,7 @@ Muscovite #KAl3Si3O10(OH)2, M 398.303 g/mol
 -start
 1 name$ = "Muscovite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7729,7 +7729,7 @@ Muscovite #KAl3Si3O10(OH)2, M 398.303 g/mol
 Oligoclase_ss#Ca0.186Na0.814Al1.186Si2.814O8, M 265.2 g/mol
 -start
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * 265.2 else S = ((m/m0)^(2/3)) * 265.2 * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * 265.2 else S = m0 * ((m/m0)^(2/3)) * 265.2 * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7760,7 +7760,7 @@ Pargasite #NaCa2Al3Mg4Si6O22(OH)2, M 835.814 g/mol, kinetic parameters from glau
 -start
 1 name$ = "Pargasite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7785,7 +7785,7 @@ Pargasite #NaCa2Al3Mg4Si6O22(OH)2, M 835.814 g/mol, kinetic parameters from glau
 Phlogopite	#KAlMg3Si3O10(OH)2; M 417.25
 -start
 1 name$ = "Phlogopite"
-2 if PARM(1) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+2 if PARM(1) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 ##------------------Kinetic calculation---------------------##
 		# parameters
 1000 Aa = 5.90e-7 #mol.m-2.s-1
@@ -7813,7 +7813,7 @@ Quartz#SiO2; M 60.08 g/mol
 -start
 1 name$ = "Quartz"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7839,7 +7839,7 @@ Quartz#SiO2; M 60.08 g/mol
 Riebeckite_ss#Na2Fe5Si8O22(OH)2, M 935.877 g/mol, kinetic parameters from tremolite
 -start
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * 935.877 else S = ((m/m0)^(2/3)) * 935.877 * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * 935.877 else S = m0 * ((m/m0)^(2/3)) * 935.877 * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7865,7 +7865,7 @@ Sanidine_high #KAlSi3O8; M 278.33 g/mol
 -start
 1 name$ = "Sanidine_high"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7896,7 +7896,7 @@ SiO2(am)#M 60.08 g/mol
 -start
 1 name$ = "SiO2(am)"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
@@ -7923,7 +7923,7 @@ Tremolite #Ca2Mg5Si8O22(OH)2, 812.353 g/mol
 -start
 1 name$ = "Tremolite"
 2 if (PARM(1) = 0) then  goto 3 else goto 5
-3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
+3 if PARM(3) = 0 then S = PARM(2) * m * GFW(PHASE_FORMULA(name$)) else S = m0 * ((m/m0)^(2/3)) * GFW(PHASE_FORMULA(name$)) * PARM(2)
 4 GOTO 1000
 5 S = PARM(2)*TOT("water")
 ##------------------Kinetic calculation---------------------##
