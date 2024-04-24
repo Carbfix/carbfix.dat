@@ -196,6 +196,8 @@ Gd(+3)	Gd+3	0	Gd
 H	H+	-1	H	1.0079
 H(0)	H2	0	H	
 H(+1)	H+	-1	0	
+He	 He		0.0	He		4.0026
+He(0)	 He		0.0	He
 K	K+	0	K	39.0983
 Li	Li+	0	Li	6.941
 Mg	Mg+2	0	Mg	24.305
@@ -331,6 +333,11 @@ H+ = H+
 	log_k		0
 	-delta_H	0		kJ/mol
 #	deltafH		-0		kJ/mol
+
+He =  He 
+	-llnl_gamma	3	
+	log_k 0
+	-delta_H	0	kJ/mol
 
 HCO3- = HCO3- 
 	-llnl_gamma	4	
@@ -6848,6 +6855,13 @@ H2(g)
 	-Omega		0.225 # phreeqc.dat
 #	Extrapol	supcrt92
 #	Ref		WEP+82, Kel60
+
+He(g)
+	He = + 1.0000 He       
+	log_k	-3.4143
+	-delta_H	-0.6276	kJ/mol
+	-analytic -1.3402e+001 4.6358e-003 1.8295e+002 2.8070e+000 9.3373e+004
+	#       -Range:  0-300
 
 H2O(g) # HP98
 	H2O = 1.000 H2O
